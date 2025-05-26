@@ -6,6 +6,8 @@ import { Inventaire } from "./pages/Inventaire/Inventaire";
 import { Rapport } from "./pages/rapport/Rapport";
 import { Register } from "./pages/register/Register";
 import { Login } from "./pages/login/Login";
+import { UseAuthContext } from "./Context/AuthContext";
+import { PrivateRoute } from "./PrivateRoute/PrivateRoute";
 
 function App() {
   const root = createBrowserRouter([
@@ -13,14 +15,29 @@ function App() {
       path: "/",
       element: <Layout />,
       children: [
-        { index: true, element: <Home /> },
+        {
+          index: true,
+          element: (
+            <PrivateRoute>
+              <Home />
+            </PrivateRoute>
+          ),
+        },
         {
           path: "/inventaire",
-          element: <Inventaire />,
+          element: (
+            <PrivateRoute>
+              <Inventaire />
+            </PrivateRoute>
+          ),
         },
         {
           path: "/rapport",
-          element: <Rapport />,
+          element: (
+            <PrivateRoute>
+              <Rapport />
+            </PrivateRoute>
+          ),
         },
       ],
     },

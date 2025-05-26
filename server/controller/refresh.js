@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 const refresh = async (req, res) => {
   const refreshToken = req.cookies.refresh_token;
   if (!refreshToken) {
-    res.status(404).json({ erro: "refreshtoken n'existe pas" });
+    res.status(403).json({ erro: "refreshtoken n'existe pas" });
   }
   try {
     const [row] = await pool.execute(
@@ -12,7 +12,7 @@ const refresh = async (req, res) => {
     );
 
     if (row.length === 0) {
-      res.status(404).json({ erro: "refreshtoken ne correspond pas" });
+      res.status(403).json({ erro: "refreshtoken ne correspond pas" });
     }
     const userId = row[0].userId;
 
@@ -22,7 +22,7 @@ const refresh = async (req, res) => {
     );
 
     if (userRow.length === 0) {
-      res.status(404).json({ error: "Utilisateur non trouve" });
+      res.status(403).json({ error: "Utilisateur non trouve" });
     }
     const user = userRow[0];
     const payload = { id: user.id, nom: user.nom, role: user.role };

@@ -27,7 +27,9 @@ const login = async (req, res) => {
 
     const refres_token = crypto.randomBytes(32).toString("hex");
     const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
-
+    await pool.execute("delete from refresh_tokens WHERE userId = ?", [
+      user.id,
+    ]);
     await pool.execute(
       "insert into refresh_tokens(userId,token,expiresAt) values(?,?,?)",
       [user.id, refres_token, expiresAt]

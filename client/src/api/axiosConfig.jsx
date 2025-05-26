@@ -7,19 +7,22 @@ export const api = axios.create({
 api.interceptors.response.use(
   (response) => response,
   async (error) => {
-    const originalRequest = error.config;
-    console.log("la requette original", originalRequest);
+    let originalRequest = error.config;
 
-    if ((error.response?.status === 401) & !originalRequest._retry) {
+    if (error.response?.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
+      console.log(originalRequest._retry);
       try {
-        await axios.post("http://localhost:3000/refresh", {
+        await axios.post("http://localhost:3000/refresh", null, {
           withCredentials: true,
         });
         return api(originalRequest);
       } catch (refreshError) {
-        window.location.href = "/login"; // Rediriger si le rafraîchissement échoue
         return Promise.reject(refreshError);
+      }
+    } else if (error.response?.status === 403) {
+      if (window.location.pathname !== "/login") {
+        window.location.href = "/login";
       }
     }
     return Promise.reject(error);

@@ -6,9 +6,11 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { AiOutlineStock } from "react-icons/ai";
 import { login_api } from "../../api/login_api";
 import useForm from "../../hooks/useForm";
+import { UseAuthContext } from "../../Context/AuthContext";
 
 export function Login() {
   const navigate = useNavigate();
+  const { setUser } = UseAuthContext();
   const initiaValue = {
     email: "",
     password: "",
@@ -18,7 +20,9 @@ export function Login() {
       email: inputValue.email,
       password: inputValue.password,
       navigate: navigate,
+      setUser: setUser,
     });
+	
   };
   const { inputValue, handleChange, handleSubmit } = useForm(
     initiaValue,
