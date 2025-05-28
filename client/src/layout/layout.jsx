@@ -5,16 +5,19 @@ import NavComponent from "../components/NavComponent/NavComponent";
 
 export function Layout() {
   const [isSideOpen, setIsSideOpen] = useState(true);
+  const [globalFilter, setGlobalFilter] = useState([]);
+
   const handleToggleSidebar = () => setIsSideOpen(!isSideOpen);
+
   return (
-    <div className="min-h-screen flex flex-col  relative">
+    <div className=" h-screen min-h-screen max-h-screen flex flex-col  relative overflow-hidden">
       {isSideOpen && (
         <div
           className="absolute inset-0  backdrop-blur-xs z-10 md:hidden"
           onClick={handleToggleSidebar}
         />
       )}
-      <div className="  flex-1 grid grid-cols-1 md:grid-cols-[200px_1fr]">
+      <div className=" w-full h-full overflow-hidden  flex-1 grid grid-cols-1 md:grid-cols-[200px_1fr]">
         <div
           className={`h-full w-[200px]  ${
             isSideOpen
@@ -24,9 +27,13 @@ export function Layout() {
         >
           <Sidebar Open={isSideOpen} />
         </div>
-        <div className="mx-0.5 flex flex-col gap-y-2">
-          <NavComponent handleToggleSidebar={handleToggleSidebar} />
-          <Outlet />
+        <div className=" overflow-y-auto flex flex-col gap-y-2 h-full w-full ">
+          <NavComponent
+            inputValue={globalFilter}
+            setInput={setGlobalFilter}
+            handleToggleSidebar={handleToggleSidebar}
+          />
+          <Outlet context={{ globalFilter, setGlobalFilter }} />
         </div>
       </div>
     </div>

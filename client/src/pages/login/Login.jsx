@@ -22,7 +22,6 @@ export function Login() {
       navigate: navigate,
       setUser: setUser,
     });
-	
   };
   const { inputValue, handleChange, handleSubmit } = useForm(
     initiaValue,
@@ -59,7 +58,11 @@ export function Login() {
           />
 
           <div className="w-80">
-            <ButtonComponent type={"submit"} name={"Se connecter"} />
+            <ButtonComponent
+              style={{ width: "100%" }}
+              type={"submit"}
+              name={"Se connecter"}
+            />
           </div>
         </form>
         <small className="mt-2">

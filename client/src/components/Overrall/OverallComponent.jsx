@@ -2,7 +2,7 @@ import React from "react";
 
 function OverallComponent({ title = "Inventaire global" }) {
   return (
-    <div className=" flex flex-col bg-white rounded-md py-4 px-3 ">
+    <div className=" flex flex-col bg-white rounded-md py-4 px-3 w-full ">
       <div className="text-my-handing text-xl pb-4">{title}</div>
       <div className="flex justify-between divide-x-2 divide-my-border items-center">
         <div className=" flex-none w-1/4 flex  flex-col gap-y-3">

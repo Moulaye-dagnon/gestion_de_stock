@@ -8,6 +8,7 @@ import { Register } from "./pages/register/Register";
 import { Login } from "./pages/login/Login";
 import { UseAuthContext } from "./Context/AuthContext";
 import { PrivateRoute } from "./PrivateRoute/PrivateRoute";
+import ProduitDetail from "./pages/ProduitDetail/ProduitDetail";
 
 function App() {
   const root = createBrowserRouter([
@@ -28,6 +29,14 @@ function App() {
           element: (
             <PrivateRoute>
               <Inventaire />
+            </PrivateRoute>
+          ),
+        },
+        {
+          path: "/inventaire/produit/:produitId/detail",
+          element: (
+            <PrivateRoute>
+              <ProduitDetail />
             </PrivateRoute>
           ),
         },

@@ -78,7 +78,11 @@ export function Register() {
             handlechange={handleChange}
           />
           <div className="w-80">
-            <ButtonComponent type={"submit"} name={"Créez votre compte"} />
+            <ButtonComponent
+              style={{ width: "100%" }}
+              type={"submit"}
+              name={"Créez votre compte"}
+            />
           </div>
         </form>
         <small className="mt-2">
