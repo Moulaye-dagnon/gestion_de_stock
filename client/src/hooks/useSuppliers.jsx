@@ -1,14 +1,14 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import React from "react";
-import allProduit_api from "../api/allProduit_api";
+import allSuppliers from "../api/allSuppliers";
 
-function useProduit() {
+function useSuppliers() {
   const QueryClient = useQueryClient();
   const { isLoading, error, data } = useQuery({
-    queryKey: ["allProduits"],
-    queryFn: allProduit_api,
+    queryKey: ["allSuppliers"],
+    queryFn: allSuppliers,
   });
   return { isLoading, error, data };
 }
 
-export default useProduit;
+export default useSuppliers;

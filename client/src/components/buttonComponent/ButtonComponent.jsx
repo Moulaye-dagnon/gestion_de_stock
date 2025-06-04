@@ -5,10 +5,12 @@ export default function ButtonComponent({
   handleClick,
   name,
   style = {},
+  disable,
 }) {
   return (
     <>
       <button
+        disabled={disable ? disable : false}
         type={type}
         style={style}
         onClick={handleClick ? handleClick : null}

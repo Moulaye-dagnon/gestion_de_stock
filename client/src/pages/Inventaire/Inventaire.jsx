@@ -5,46 +5,49 @@ import OverallComponent from "../../components/Overrall/OverallComponent";
 import useProduit from "../../hooks/useProduit";
 import TanStackTable from "../../tanStack/Table/tanStackTable";
 import { flexRender } from "@tanstack/react-table";
-import ButtonComponent from "../../components/buttonComponent/buttonComponent";
+import ButtonComponent from "../../components/buttonComponent/ButtonComponent";
 import { IoFilter } from "react-icons/io5";
 import { TbArrowsSort } from "react-icons/tb";
 import { IoIosArrowRoundForward } from "react-icons/io";
 import AddProduitComponent from "../../components/addProduit/AddProduitComponent";
+import SpinnerComponent from "../../components/Spinner/SpinnerComponent";
 
 export function Inventaire() {
   const navigate = useNavigate();
-  const [hideAddComponet, setAddComponent] = useState(true);
+  const [hideAddComponet, setAddComponent] = useState(false);
+  const handleHideAddComponent = () => setAddComponent((c) => !c);
   const { user } = UseAuthContext();
-  //   useEffect(() => {
-  //     if (!user) {
-  //       navigate("/login");
-  //     }
-  //   }, []);
-  const { isloading, error, data } = useProduit();
-  const d = useOutletContext();
+  useEffect(() => {
+    if (!user) {
+      navigate("/login");
+    }
+  }, []);
+  const { isLoading, error, data } = useProduit();
+  const propsOutlet = useOutletContext();
   const table = TanStackTable({
     Data: data,
-    globalFilter: d.globalFilter,
-    setGlobalFilter: d.setGlobalFilter,
+    globalFilter: propsOutlet.globalFilter,
+    setGlobalFilter: propsOutlet.setGlobalFilter,
   });
-  if (isloading) {
-    return <div>...chargement</div>;
+  if (isLoading) {
+    return <SpinnerComponent />;
   }
   if (error) {
     return <div>{error}</div>;
   }
-  if (!data || data.length == 0) {
-    return <div> no found</div>;
-  }
+
   return (
     <>
-      <div className=" flex-1 flex flex-col gap-y-2 overflow-auto  m-4 ">
+      <div className=" flex-1 flex flex-col gap-y-2 overflow-auto   w-full ">
         <OverallComponent title="Inventaire global" />
         <div className=" flex-1   flex flex-col py-2.5 px-1.5 bg-white ">
           <div className="flex justify-between py-1.5">
             <div>Produit</div>
             <div className="flex  items-center">
-              <ButtonComponent name={"Ajouter"} />
+              <ButtonComponent
+                name={"Ajouter"}
+                handleClick={handleHideAddComponent}
+              />
               <span className=" flex items-center py-2 px-4 border rounded-sm border-my-border ml-2 ">
                 <span className="w-5 mr-2  ">
                   <IoFilter size={"100%"} />
@@ -54,8 +57,8 @@ export function Inventaire() {
             </div>
           </div>
           <div className=" flex-1 px-2 py-2 flex flex-col ">
-            <div className=" flex-1 ">
-              <table className="min-w-full divide-y divide-gray-200">
+            <div className=" flex-1 overflow-x-auto ">
+              <table className="min-w-full divide-y border-collapse  divide-gray-200">
                 <thead className="bg-gray-50">
                   {table.getHeaderGroups().map((headerGroups) => (
                     <tr key={headerGroups.id}>

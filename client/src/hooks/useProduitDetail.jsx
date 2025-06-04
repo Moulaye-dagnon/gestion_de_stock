@@ -3,11 +3,11 @@ import React from "react";
 import Produit_api from "../api/Produit";
 
 function useProduitDetail({ id }) {
-  const { isloading, error, data } = useQuery({
+  const { isLoading, error, data } = useQuery({
     queryKey: ["produit", id],
     queryFn: () => Produit_api(id),
   });
-  return { isloading, error, data };
+  return { isLoading, error, data };
 }
 
 export default useProduitDetail;

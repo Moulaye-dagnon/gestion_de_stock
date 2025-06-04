@@ -15,9 +15,13 @@ app.use(
 app.use(coockieParser());
 const port = process.env.PORT || 3000;
 const authRoute = require("./route/auth");
-const produit = require("./route/produit");
+const product = require("./route/produit");
+const supplier = require("./route/supplier");
+const InStock = require("./route/INStock");
 app.use("", authRoute);
-app.use("", produit);
+app.use("", product);
+app.use("", supplier);
+app.use("", InStock);
 app.listen(port, (req, res) => {
   console.log("server lance sur le port", port);
 });

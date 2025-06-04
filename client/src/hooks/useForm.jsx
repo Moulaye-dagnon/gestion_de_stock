@@ -10,7 +10,7 @@ const useForm = (initiaValue, onSubmit) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     onSubmit(inputValue);
-    setInputValue(initiaValue);
+    // setInputValue(initiaValue);
   };
 
   return {

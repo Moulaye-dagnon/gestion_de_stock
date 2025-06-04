@@ -7,13 +7,29 @@ export function InputComponent({
   value,
   handlechange,
   emptyValue,
+  addInput = false,
 }) {
   return (
-    <div className=" w-80 mb-4 ">
-      <label htmlFor={id} className="block text-sm/6 font-medium text-gray-900">
+    <div
+      className={`  ${
+        addInput
+          ? " gap-2 flex justify-between mx-auto items-center mb-5"
+          : "mb-4 w-80"
+      } `}
+    >
+      <label
+        htmlFor={id}
+        className={` ${
+          addInput ? "text-lg max-w-[30%]" : ""
+        } block text-sm/6 font-medium text-gray-900`}
+      >
         {label}
       </label>
-      <div className=" mt-1 w-full rounded-md bg-white  outline-1 -outline-offset-1 outline-gray-300 has-[input:focus-within]:outline-2 has-[input:focus-within]:-outline-offset-2 has-[input:focus-within]:outline-indigo-600">
+      <div
+        className={`  ${
+          addInput ? " flex-none w-[65%] " : "w-full mt-1"
+        }  flex-1 rounded-md bg-white  outline-1 -outline-offset-1 outline-gray-300 has-[input:focus-within]:outline-2 has-[input:focus-within]:-outline-offset-2 has-[input:focus-within]:outline-indigo-600`}
+      >
         <input
           id={id}
           name={name}

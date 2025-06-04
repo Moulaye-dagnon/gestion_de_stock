@@ -7,7 +7,6 @@ import { AuthContextProvider } from "./Context/AuthContext.jsx";
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      cacheTime: 10 * 60 * 1000,
       staleTime: 15 * 1000,
       refetchOnWindowFocus: true,
       refetchOnMount: true,

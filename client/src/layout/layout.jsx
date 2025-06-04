@@ -17,17 +17,21 @@ export function Layout() {
           onClick={handleToggleSidebar}
         />
       )}
-      <div className=" w-full h-full overflow-hidden  flex-1 grid grid-cols-1 md:grid-cols-[200px_1fr]">
+      <div
+        className={` w-full h-full overflow-hidden  flex-1 grid grid-cols-1  ${
+          isSideOpen ? "  md:grid-cols-[200px_1fr]  gap-2" : "grid-cols-1"
+        }`}
+      >
         <div
           className={`h-full w-[200px]  ${
             isSideOpen
-              ? "absolute inset-y-0 left-0 translate-x-0 z-20"
-              : "absolute -translate-x-full hidden "
-          } md:static md:block translate-none `}
+              ? " inset-y-0 left-0 opacity-100 translate-x-0 z-20"
+              : " -translate-x-full hidden opacity-0 "
+          } absolute  md:static  translate-none `}
         >
           <Sidebar Open={isSideOpen} />
         </div>
-        <div className=" overflow-y-auto flex flex-col gap-y-2 h-full w-full ">
+        <div className=" overflow-auto flex flex-col gap-y-2 h-full w-full relative ">
           <NavComponent
             inputValue={globalFilter}
             setInput={setGlobalFilter}

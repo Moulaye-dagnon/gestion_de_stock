@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   createColumnHelper,
   getCoreRowModel,
@@ -34,7 +34,10 @@ const columns = [
 ];
 
 function TanStackTable({ Data, globalFilter, setGlobalFilter }) {
-  const [data] = useState(Data || []);
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    if (Data) setData(Data);
+  }, [Data]);
 
   const table = useReactTable({
     data,
@@ -50,7 +53,7 @@ function TanStackTable({ Data, globalFilter, setGlobalFilter }) {
     initialState: {
       pagination: {
         pageIndex: 0,
-        pageSize: 10,
+        pageSize: 15,
       },
     },
   });

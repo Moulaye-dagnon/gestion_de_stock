@@ -12,7 +12,7 @@ const refresh = async (req, res) => {
     );
 
     if (row.length === 0) {
-      res.status(403).json({ erro: "refreshtoken ne correspond pas" });
+      return res.status(403).json({ erro: "refreshtoken ne correspond pas" });
     }
     const userId = row[0].userId;
 
@@ -22,7 +22,7 @@ const refresh = async (req, res) => {
     );
 
     if (userRow.length === 0) {
-      res.status(403).json({ error: "Utilisateur non trouve" });
+      return res.status(403).json({ error: "Utilisateur non trouve" });
     }
     const user = userRow[0];
     const payload = { id: user.id, nom: user.nom, role: user.role };
