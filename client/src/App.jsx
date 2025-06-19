@@ -13,6 +13,8 @@ import { InStock } from "./pages/inStock/InStock";
 import OutStockDetail from "./pages/outStockDetail/OutStockDetail";
 import { OutStock } from "./pages/outStock/OutStock";
 import InStockDetail from "./pages/inStockDetail/InStockDetail";
+import Supplier from "./pages/Suppliers/Supplier";
+import SupplierDetail from "./pages/SupplierDetail/SupplierDetail";
 
 function App() {
   const root = createBrowserRouter([
@@ -45,10 +47,18 @@ function App() {
           ),
         },
         {
-          path: "/rapport",
+          path: "/fournisseur",
           element: (
             <PrivateRoute>
-              <Rapport />
+              <Supplier />
+            </PrivateRoute>
+          ),
+        },
+        {
+          path: "/fournisseur/:fournisseurId/detail",
+          element: (
+            <PrivateRoute>
+              <SupplierDetail />
             </PrivateRoute>
           ),
         },

@@ -1,37 +1,36 @@
 import React from "react";
+import useForm from "../../hooks/useForm";
 import { InputComponent } from "../InputComponent/InputComponent";
 import ButtonComponent from "../buttonComponent/ButtonComponent";
-import useSuppliers from "../../hooks/useSuppliers";
-import SelectComponent from "../SelectComponent/SelectComponent";
-import useForm from "../../hooks/useForm";
-import useCreateProductMutation from "../../hooks/useCreateProductMutation";
+import useProduitDetail from "../../hooks/useProduitDetail";
+import { useParams } from "react-router";
 import SpinnerComponent from "../Spinner/SpinnerComponent";
 
-function AddProduitComponent({ setAddComponent }) {
-  const { isLoading: isLoadingSuppliers, data } = useSuppliers();
+function UpdateProduit({ setHideUpdateComponent }) {
+  const { produitId } = useParams();
+  const { isLoading, data } = useProduitDetail({ id: produitId });
+  if (isLoading) {
+    return <SpinnerComponent />;
+  }
   const initialeValue = {
-    nom: "",
-    fournisseurId: "",
-    categorie: "",
-    prixAchat: "",
-    prixVente: "",
-    description: "",
-    quantite: "",
-    seuilApprovisionnement: "",
+    nom: data.nom,
+    categorie: data.categorie,
+    prixAchat: data.prixAchat,
+    prixVente: data.prixVente,
+    description: data.description,
+    seuilApprovisionnement: data.seuilApprovisionnement,
   };
-  const { mutate } = useCreateProductMutation();
+  //   const { mutate } = useCreateProductMutation();
   const onSubmit = (inputValue) => {
-    mutate(inputValue);
+    console.log(inputValue);
   };
   const { inputValue, handleChange, handleSubmit } = useForm(
     initialeValue,
     onSubmit
   );
-  if (isLoadingSuppliers) {
-    return <SpinnerComponent />;
-  }
+
   return (
-    <div className=" absolute overflow-hidden inset-0  bg-black/50 flex justify-center items-center z-30 ">
+    <div className=" absolute  inset-0  bg-black/50 flex justify-center items-center z-30 ">
       <div className="bg-white rounded-sm h-[90%] w-120 px-7 py-6 flex justify-between flex-col">
         <div className=" mb-3 font-bold text-xl ">Nouveau Produit</div>
         <form
@@ -58,14 +57,6 @@ function AddProduitComponent({ setAddComponent }) {
               placeholder={"Entrez une description"}
               handlechange={handleChange}
               addInput={true}
-            />
-            <SelectComponent
-              items={data}
-              value={inputValue.fournisseurId}
-              title={"Fournisseur"}
-              handleChange={handleChange}
-              name={"fournisseurId"}
-              placeholder={"Selectionner un fournisseur"}
             />
 
             <InputComponent
@@ -100,16 +91,6 @@ function AddProduitComponent({ setAddComponent }) {
             />
 
             <InputComponent
-              label={"Quantité"}
-              name={"quantite"}
-              type={"number"}
-              value={inputValue.quantite}
-              id={"quantite"}
-              placeholder={"Entrez la quantité de produit"}
-              handlechange={handleChange}
-              addInput={true}
-            />
-            <InputComponent
               label={"Seuil d'approvisionement"}
               name={"seuilApprovisionnement"}
               type={"number"}
@@ -123,7 +104,7 @@ function AddProduitComponent({ setAddComponent }) {
           <div className=" flex justify-end gap-2 ">
             <ButtonComponent
               name={"Annuler"}
-              handleClick={() => setAddComponent(false)}
+              handleClick={() => setHideUpdateComponent(false)}
             />
 
             <ButtonComponent name={"Ajouter"} />
@@ -134,4 +115,4 @@ function AddProduitComponent({ setAddComponent }) {
   );
 }
 
-export default AddProduitComponent;
+export default UpdateProduit;

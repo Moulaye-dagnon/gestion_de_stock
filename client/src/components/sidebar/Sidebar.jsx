@@ -90,7 +90,7 @@ function Sidebar() {
             </li>
             <li className=" my-4 w-full">
               <NavLink
-                to={"/rapport"}
+                to={"/fournisseur"}
                 className={({ isActive }) =>
                   `flex items-center w-full  gap-2.5 py-2 px-1 rounded-md transition-all ${
                     isActive
@@ -102,7 +102,7 @@ function Sidebar() {
                 <span className="w-5 ">
                   <img src={store} alt="" srcset="" />
                 </span>
-                <span>Rapport</span>
+                <span>Fournisseur</span>
               </NavLink>
             </li>
           </ul>

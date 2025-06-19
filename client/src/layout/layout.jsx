@@ -4,7 +4,7 @@ import { useState } from "react";
 import NavComponent from "../components/NavComponent/NavComponent";
 
 export function Layout() {
-  const [isSideOpen, setIsSideOpen] = useState(true);
+  const [isSideOpen, setIsSideOpen] = useState(false);
   const [globalFilter, setGlobalFilter] = useState([]);
 
   const handleToggleSidebar = () => setIsSideOpen(!isSideOpen);

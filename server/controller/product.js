@@ -2,7 +2,7 @@ const pool = require("../db");
 const getAllProducts = async (req, res) => {
   try {
     const [row] = await pool.execute(
-      "select id,nom,categorie,prixAchat,prixVente ,quantiteStock  from produit "
+      "select id,nom,categorie,prixAchat,prixVente ,quantiteStock,seuilApprovisionnement  from produit "
     );
     if (row.length == 0)
       return res.status(404).json({ message: "La table produits est vide" });

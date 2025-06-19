@@ -8,7 +8,6 @@ function TextareaComponent({
   type,
   value,
   handlechange,
-  addInput = false,
 }) {
   return (
     <div className=" gap-2 flex justify-between mx-auto items-center mb-5">

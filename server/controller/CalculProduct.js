@@ -2,28 +2,31 @@ const pool = require("../db");
 
 const CalculProduct = async (req, res) => {
   try {
-    const [Total] = pool.execute(
-      "SELECT COUNT(DISTINCT categorie) as TotalCategorie,  COUNT(*) as TotalProduit FROM produitSELECT  COUNT(DISTINCT categorie) FROM produit"
+    const [Total] = await pool.execute(
+      "SELECT COUNT(DISTINCT categorie) AS TotalCategorie, COUNT(*) AS TotalProduit FROM produit"
     );
-    console.log(Total);
-    const [LowProduit] = pool.execute(
+
+    const [LowProduit] = await pool.execute(
       "SELECT COUNT(*) as LowProduit FROM produit WHERE quantiteStock <= seuilApprovisionnement"
     );
-    const [FinishedProduit] = pool.execute(
+
+    const [FinishedProduit] = await pool.execute(
       "SELECT COUNT(*) as FinishedProduit FROM produit WHERE quantiteStock = 0"
     );
+
     const data = {
       TotalCategorie: Total[0].TotalCategorie,
       TotalProduit: Total[0].TotalProduit,
-      LowProduit: Total[0].LowProduit,
-      FinishedProduit: Total[0].FinishedProduit,
+      LowProduit: LowProduit[0].LowProduit,
+      FinishedProduit: FinishedProduit[0].FinishedProduit,
     };
-    res.status(200).json(data);
+
+    res.status(200).json({ message: "Donnée chargée", data: data });
   } catch (error) {
     console.error(error);
     res.status(500).json({
       error: "Erreur serveur",
-      messageError: "erreur lors du calcul des statistique",
+      messageError: "Erreur lors du calcul des statistiques",
     });
   }
 };
