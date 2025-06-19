@@ -1,39 +1,12 @@
 import React, { useEffect, useState } from "react";
 import {
-  createColumnHelper,
   getCoreRowModel,
   getFilteredRowModel,
   getPaginationRowModel,
-  getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { useOutletContext } from "react-router";
-const columnHelper = createColumnHelper();
 
-const columns = [
-  columnHelper.accessor("nom", {
-    cell: (info) => info.getValue(),
-    header: () => <span className="flex item-center">Produit</span>,
-  }),
-  columnHelper.accessor("prixAchat", {
-    cell: (info) => info.getValue(),
-    header: () => <span className="flex item-center">Prix d'achat</span>,
-  }),
-  columnHelper.accessor("prixVente", {
-    cell: (info) => info.getValue(),
-    header: () => <span className="flex item-center">Prix de vente</span>,
-  }),
-  columnHelper.accessor("categorie", {
-    cell: (info) => info.getValue(),
-    header: () => <span className="flex item-center">Categorie</span>,
-  }),
-  columnHelper.accessor("quantiteStock", {
-    cell: (info) => info.getValue(),
-    header: () => <span className="flex item-center">Quantité</span>,
-  }),
-];
-
-function TanStackTable({ Data, globalFilter, setGlobalFilter }) {
+function TanStackTable({ Data, globalFilter, setGlobalFilter, columns }) {
   const [data, setData] = useState([]);
   useEffect(() => {
     if (Data) setData(Data);
@@ -45,7 +18,7 @@ function TanStackTable({ Data, globalFilter, setGlobalFilter }) {
       globalFilter,
     },
 
-    columns,
+    columns: columns,
     getCoreRowModel: getCoreRowModel(),
     onGlobalFilterChange: setGlobalFilter,
     getFilteredRowModel: getFilteredRowModel(),

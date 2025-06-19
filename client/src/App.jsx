@@ -6,9 +6,13 @@ import { Inventaire } from "./pages/Inventaire/Inventaire";
 import { Rapport } from "./pages/rapport/Rapport";
 import { Register } from "./pages/register/Register";
 import { Login } from "./pages/login/Login";
-import { UseAuthContext } from "./Context/AuthContext";
+import { AuthContextProvider } from "./Context/AuthContext";
 import { PrivateRoute } from "./PrivateRoute/PrivateRoute";
 import ProduitDetail from "./pages/ProduitDetail/ProduitDetail";
+import { InStock } from "./pages/inStock/InStock";
+import OutStockDetail from "./pages/outStockDetail/OutStockDetail";
+import { OutStock } from "./pages/outStock/OutStock";
+import InStockDetail from "./pages/inStockDetail/InStockDetail";
 
 function App() {
   const root = createBrowserRouter([
@@ -48,6 +52,38 @@ function App() {
             </PrivateRoute>
           ),
         },
+        {
+          path: "/stock/entre",
+          element: (
+            <PrivateRoute>
+              <InStock />
+            </PrivateRoute>
+          ),
+        },
+        {
+          path: "/stock/entre/:entreStockId/detail",
+          element: (
+            <PrivateRoute>
+              <InStockDetail />
+            </PrivateRoute>
+          ),
+        },
+        {
+          path: "/stock/sortie",
+          element: (
+            <PrivateRoute>
+              <OutStock />
+            </PrivateRoute>
+          ),
+        },
+        {
+          path: "/stock/sortie/:sortieStockId/detail",
+          element: (
+            <PrivateRoute>
+              <OutStockDetail />
+            </PrivateRoute>
+          ),
+        },
       ],
     },
     {
@@ -59,7 +95,11 @@ function App() {
       element: <Login />,
     },
   ]);
-  return <RouterProvider router={root} />;
+  return (
+    <AuthContextProvider>
+      <RouterProvider router={root} />;
+    </AuthContextProvider>
+  );
 }
 
 export default App;

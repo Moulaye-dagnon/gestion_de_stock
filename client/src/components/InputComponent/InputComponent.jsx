@@ -6,7 +6,6 @@ export function InputComponent({
   type,
   value,
   handlechange,
-  emptyValue,
   addInput = false,
 }) {
   return (

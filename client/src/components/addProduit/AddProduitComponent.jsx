@@ -19,8 +19,7 @@ function AddProduitComponent({ setAddComponent }) {
     quantite: "",
     seuilApprovisionnement: "",
   };
-  const { isLoading, isSuccess, mutate, error, isError } =
-    useCreateProductMutation();
+  const { mutate, error, isError } = useCreateProductMutation();
   const onSubmit = (inputValue) => {
     mutate(inputValue);
   };
@@ -32,7 +31,7 @@ function AddProduitComponent({ setAddComponent }) {
     return <SpinnerComponent />;
   }
   return (
-    <div className=" absolute inset-0  bg-black/50 flex justify-center items-center z-30 ">
+    <div className=" absolute overflow-hidden inset-0  bg-black/50 flex justify-center items-center z-30 ">
       <div className="bg-white rounded-sm h-[90%] w-120 px-7 py-6 flex justify-between flex-col">
         <div className=" mb-3 font-bold text-xl ">Nouveau Produit</div>
         <form
@@ -65,6 +64,8 @@ function AddProduitComponent({ setAddComponent }) {
               value={inputValue.fournisseurId}
               title={"Fournisseur"}
               handleChange={handleChange}
+              name={"fournisseurId"}
+              placeholder={"Selectionner un fournisseur"}
             />
 
             <InputComponent

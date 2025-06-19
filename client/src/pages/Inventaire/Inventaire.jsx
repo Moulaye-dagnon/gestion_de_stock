@@ -11,23 +11,25 @@ import { TbArrowsSort } from "react-icons/tb";
 import { IoIosArrowRoundForward } from "react-icons/io";
 import AddProduitComponent from "../../components/addProduit/AddProduitComponent";
 import SpinnerComponent from "../../components/Spinner/SpinnerComponent";
+import columnsProduct from "../../tanStack/Columns/ProductColumn";
 
 export function Inventaire() {
   const navigate = useNavigate();
   const [hideAddComponet, setAddComponent] = useState(false);
   const handleHideAddComponent = () => setAddComponent((c) => !c);
-  const { user } = UseAuthContext();
+  const { user, isloading } = UseAuthContext();
   useEffect(() => {
-    if (!user) {
+    if ((!isloading && !user) || !user) {
       navigate("/login");
     }
-  }, []);
+  }, [user, isloading, navigate]);
   const { isLoading, error, data } = useProduit();
   const propsOutlet = useOutletContext();
   const table = TanStackTable({
     Data: data,
     globalFilter: propsOutlet.globalFilter,
     setGlobalFilter: propsOutlet.setGlobalFilter,
+    columns: columnsProduct,
   });
   if (isLoading) {
     return <SpinnerComponent />;
@@ -42,7 +44,7 @@ export function Inventaire() {
         <OverallComponent title="Inventaire global" />
         <div className=" flex-1   flex flex-col py-2.5 px-1.5 bg-white ">
           <div className="flex justify-between py-1.5">
-            <div>Produit</div>
+            <div className=" uppercase">Produit</div>
             <div className="flex  items-center">
               <ButtonComponent
                 name={"Ajouter"}

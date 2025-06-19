@@ -1,15 +1,15 @@
 const pool = require("../db");
-
-const AddInStock = async (req, res) => {
+const normalizeQuantity = require("../utils/NormalizeQantity");
+const AddEntreStock = async (req, res) => {
   const {
     produitId,
     fournisseurId,
     utilisateurId,
-    quantitEntre,
+    quantiteEntre,
     referenceCommandeLivraison,
   } = req.body;
-
-
+  const referenceCommandeLivraisonUpper =
+    referenceCommandeLivraison.toUpperCase();
   const connexion = await pool.getConnection();
   try {
     const [rowProduit] = await connexion.execute(
@@ -25,12 +25,16 @@ const AddInStock = async (req, res) => {
       [utilisateurId]
     );
     if (rowProduit.length === 0)
-      return res.status(401).json({ message: "Ce produit n'existe pas" });
+      return res.status(404).json({ message: "Ce produit n'existe pas" });
     if (rowFournisseur.length === 0)
-      return res.status(401).json({ message: "Ce fournisseur n'existe pas" });
+      return res.status(404).json({ message: "Ce fournisseur n'existe pas" });
     if (rowUtilisateur.length === 0)
-      return res.status(401).json({ message: "Ce utilisateur n'existe pas" });
+      return res.status(404).json({ message: "Ce utilisateur n'existe pas" });
 
+    const quantiteStockNormalized = normalizeQuantity(
+      rowProduit[0].quantiteStock
+    );
+    const quantiteEntreNormalized = normalizeQuantity(quantiteEntre);
     await connexion.beginTransaction();
     try {
       await connexion.execute(
@@ -39,20 +43,34 @@ const AddInStock = async (req, res) => {
           produitId,
           fournisseurId,
           utilisateurId,
-          quantitEntre,
-          referenceCommandeLivraison,
+          quantiteEntreNormalized,
+          referenceCommandeLivraisonUpper,
         ]
       );
-      const totalQuantite =
-        parseFloat(rowProduit[0].quantiteStock) + quantitEntre;
+      const totalQuantite = (
+        parseFloat(quantiteStockNormalized) +
+        parseFloat(quantiteEntreNormalized)
+      ).toFixed(2);
 
-      await connexion.execute(
+      const [updateResult] = await connexion.execute(
         "UPDATE `produit` SET `quantiteStock` = ? WHERE `produit`.`id` = ?",
         [totalQuantite, produitId]
       );
+      if (updateResult.affectedRows === 0) {
+        throw new Error("Échec de la mise à jour du stock");
+      }
       await connexion.commit();
 
-      res.status(200).json({ message: "stock mis a jour" });
+      const [produitMisAJour] = await connexion.execute(
+        "SELECT id, quantiteStock FROM produit WHERE id = ?",
+        [produitId]
+      );
+      console.log("Produit mis à jour:", produitMisAJour[0]);
+
+      res.status(200).json({
+        message: "Stock mis à jour",
+        produit: produitMisAJour[0],
+      });
     } catch (error) {
       await connexion.rollback();
       res.status(500).json({
@@ -71,4 +89,4 @@ const AddInStock = async (req, res) => {
   }
 };
 
-module.exports = AddInStock;
+module.exports = AddEntreStock;

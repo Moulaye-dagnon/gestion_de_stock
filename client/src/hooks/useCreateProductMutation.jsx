@@ -7,7 +7,7 @@ function useCreateProductMutation() {
   return useMutation({
     mutationFn: addProduct,
     onSuccess: () => {
-      queryClient.invalidateQueries("allProduits");
+      queryClient.invalidateQueries({ queryKey: ["Produits"] });
     },
   });
 }

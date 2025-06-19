@@ -2,8 +2,7 @@ import React from "react";
 import useStatProduit from "../../hooks/useStatProduit";
 
 function OverallComponent({ title = "Inventaire global" }) {
-  const { isLoading, data, error } = useStatProduit();
-  console.log(isLoading, data, error);
+  //   const { isLoading, data, error } = useStatProduit();
   return (
     <div className=" flex flex-col bg-white rounded-md py-4 px-3 w-full ">
       <div className="text-my-handing text-xl pb-4">{title}</div>

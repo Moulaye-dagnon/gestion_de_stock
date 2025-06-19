@@ -4,8 +4,9 @@ import Produit_api from "../api/Produit";
 
 function useProduitDetail({ id }) {
   const { isLoading, error, data } = useQuery({
-    queryKey: ["produit", id],
+    queryKey: ["Produit", id],
     queryFn: () => Produit_api(id),
+    cacheTime: 180000,
   });
   return { isLoading, error, data };
 }

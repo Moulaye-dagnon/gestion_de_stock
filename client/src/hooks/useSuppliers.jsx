@@ -5,7 +5,7 @@ import allSuppliers from "../api/allSuppliers";
 function useSuppliers() {
   const QueryClient = useQueryClient();
   const { isLoading, error, data } = useQuery({
-    queryKey: ["allSuppliers"],
+    queryKey: ["Suppliers"],
     queryFn: allSuppliers,
   });
   return { isLoading, error, data };

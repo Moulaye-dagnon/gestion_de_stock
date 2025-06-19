@@ -5,7 +5,7 @@ import allProduit_api from "../api/allProduit_api";
 function useProduit() {
   const QueryClient = useQueryClient();
   const { isLoading, error, data } = useQuery({
-    queryKey: ["allProduits"],
+    queryKey: ["Produits"],
     queryFn: allProduit_api,
   });
   return { isLoading, error, data };

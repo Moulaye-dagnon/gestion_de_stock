@@ -18,10 +18,12 @@ const authRoute = require("./route/auth");
 const product = require("./route/produit");
 const supplier = require("./route/supplier");
 const InStock = require("./route/INStock");
+const OutStock = require("./route/OutStock");
 app.use("", authRoute);
 app.use("", product);
 app.use("", supplier);
 app.use("", InStock);
+app.use("", OutStock);
 app.listen(port, (req, res) => {
   console.log("server lance sur le port", port);
 });

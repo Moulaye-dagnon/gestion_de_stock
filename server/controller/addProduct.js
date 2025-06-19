@@ -11,16 +11,7 @@ const addProduct = async (req, res) => {
     quantite,
     seuilApprovisionnement,
   } = req.body;
-  console.log(
-    nom,
-    fournisseurId,
-    categorie,
-    prixAchat,
-    prixVente,
-    description,
-    quantite,
-    seuilApprovisionnement
-  );
+
   const CategorieUpper = categorie.toUpperCase();
   try {
     const [row] = await pool.execute(

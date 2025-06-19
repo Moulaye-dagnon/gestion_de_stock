@@ -29,7 +29,7 @@ export function Layout() {
               : " -translate-x-full hidden opacity-0 "
           } absolute  md:static  translate-none `}
         >
-          <Sidebar Open={isSideOpen} />
+          <Sidebar />
         </div>
         <div className=" overflow-auto flex flex-col gap-y-2 h-full w-full relative ">
           <NavComponent

@@ -1,15 +1,13 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { api } from "../api/axiosConfig";
+import { api, setSetUserHandler } from "../api/axiosConfig";
 
 const AuthContext = createContext(null);
 export const UseAuthContext = () => {
   return useContext(AuthContext);
 };
-
 export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [isloading, setIsloading] = useState(true);
-
   useEffect(() => {
     const fetchUser = async () => {
       try {
@@ -27,8 +25,15 @@ export const AuthContextProvider = ({ children }) => {
     };
     fetchUser();
   }, []);
+
+  const logout = () => {
+    setUser(null);
+    window.location.href = "/login";
+  };
+  useEffect(() => setSetUserHandler(() => logout));
+
   return (
-    <AuthContext.Provider value={{ user, setUser, isloading }}>
+    <AuthContext.Provider value={{ user, setUser, isloading, logout }}>
       {children}
     </AuthContext.Provider>
   );

@@ -3,13 +3,11 @@ import { NavLink } from "react-router-dom";
 import Home from "../../assets/Home.svg";
 import inventaire from "../../assets/inventaire.svg";
 import store from "../../assets/store.svg";
-import order from "../../assets/order.svg";
-import suppliers from "../../assets/suppliers.svg";
 
 import React from "react";
 import { AiOutlineStock } from "react-icons/ai";
 
-function Sidebar({ Open }) {
+function Sidebar() {
   return (
     <div className="flex flex-col h-full w-full items-center p-5 text-white md:text-black border-r bg-white rounded-r-xl border-my-border  ">
       <div className=" flex text-black flex-col justify-start  h-1/2 w-full items-center ">
@@ -58,7 +56,7 @@ function Sidebar({ Open }) {
 
             <li className=" my-4 w-full">
               <NavLink
-                to={"/entrestock"}
+                to={"/stock/entre"}
                 className={({ isActive }) =>
                   `flex items-center w-full  gap-2.5 py-2 px-1 rounded-md transition-all ${
                     isActive
@@ -75,7 +73,7 @@ function Sidebar({ Open }) {
             </li>
             <li className=" my-4 w-full">
               <NavLink
-                to={"/sortiestock"}
+                to={"/stock/sortie"}
                 className={({ isActive }) =>
                   `flex items-center w-full  gap-2.5 py-2 px-1 rounded-md transition-all ${
                     isActive

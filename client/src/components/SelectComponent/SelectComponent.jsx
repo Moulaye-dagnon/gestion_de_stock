@@ -11,14 +11,21 @@ import {
 import { ChevronUpDownIcon } from "@heroicons/react/16/solid";
 import { CheckIcon } from "@heroicons/react/20/solid";
 
-export default function SelectComponent({ title, items, value, handleChange }) {
+export default function SelectComponent({
+  title,
+  items,
+  value,
+  handleChange,
+  name,
+  placeholder,
+}) {
   return (
     <Listbox
       as="div"
       className="flex justify-between gap-2 items-center mb-5 "
       value={value}
       onChange={(newvalue) =>
-        handleChange({ target: { name: "fournisseurId", value: newvalue } })
+        handleChange({ target: { name: name, value: newvalue } })
       }
     >
       <Label className="block max-w-[30%]  text-sm/6 font-medium text-gray-900">
@@ -30,7 +37,7 @@ export default function SelectComponent({ title, items, value, handleChange }) {
             <span className="block truncate">
               {items.length > 0 && items[value - 1]
                 ? items[value - 1].nom
-                : "Sélectionner un fournisseur"}
+                : placeholder}
             </span>
           </span>
           <ChevronUpDownIcon
