@@ -1,6 +1,6 @@
 import axios from "axios";
 export const api = axios.create({
-  baseURL: "https://server-production-dbc8.up.railway.app",
+  baseURL: "http://localhost:3000",
   withCredentials: true,
 });
 
@@ -16,13 +16,9 @@ api.interceptors.response.use(
     if (error.response?.status == 401 && !originalRequest._retry) {
       originalRequest._retry = true;
       try {
-        await axios.post(
-          "https://server-production-dbc8.up.railway.app/refresh",
-          null,
-          {
-            withCredentials: true,
-          }
-        );
+        await axios.post("http://localhost:3000/refresh", null, {
+          withCredentials: true,
+        });
         return api(originalRequest);
       } catch (refreshError) {
         onSetUser(null);
