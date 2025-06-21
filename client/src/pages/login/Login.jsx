@@ -1,7 +1,6 @@
-import { useState } from "react";
 import AuthLayout from "../../components/AuthLAyout/AuthLayout";
 import { InputComponent } from "../../components/InputComponent/InputComponent";
-import ButtonComponent from "../../components/buttonComponent/buttonComponent";
+import ButtonComponent from "../../components/buttonComponent/ButtonComponent";
 import { NavLink, useNavigate } from "react-router-dom";
 import { AiOutlineStock } from "react-icons/ai";
 import useForm from "../../hooks/useForm";
