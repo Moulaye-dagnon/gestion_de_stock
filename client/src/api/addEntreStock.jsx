@@ -13,8 +13,10 @@ async function addEntreStock(newEntreStock) {
     });
     return response.data;
   } catch (error) {
-    console.log("error lors de la creation d'une nouvelle EntreStock");
-    throw new Error(`Failed to create new EntreStock: ${error.message}`);
+    const errorMessage = error.response?.data?.errors
+      ? error.response.data.errors.map((err) => err.msg).join(", ")
+      : error.response?.data?.message || error.message;
+    throw new Error(errorMessage);
   }
 }
 

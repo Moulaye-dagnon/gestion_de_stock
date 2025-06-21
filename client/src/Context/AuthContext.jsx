@@ -14,11 +14,8 @@ export const AuthContextProvider = ({ children }) => {
         const response = await api.get("/me");
         setUser(response.data);
       } catch (error) {
-        console.log(
-          "Erreur lors de l'authentification de l'utilisateur",
-          error
-        );
         setUser(null);
+        throw new Error("erreur d'appel user", error);
       } finally {
         setIsloading(false);
       }

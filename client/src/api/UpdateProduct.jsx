@@ -6,8 +6,10 @@ async function UpdateProduct({ id, productData }) {
     const response = await api.put(`/produit/${id}/update`, productData);
     return response.data.produit;
   } catch (error) {
-    console.log("error lors de la mis a jour du produit", error);
-    throw new Error(`Failed to update product: ${error.message}`);
+    const errorMessage = error.response?.data?.errors
+      ? error.response.data.errors.map((err) => err.msg).join(", ")
+      : error.response?.data?.message || error.message;
+    throw new Error(errorMessage);
   }
 }
 

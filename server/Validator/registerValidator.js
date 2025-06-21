@@ -1,0 +1,25 @@
+const { validationResult, body } = require("express-validator");
+const addRegisteValidator = [
+  body("nom")
+    .isString()
+    .trim()
+    .notEmpty()
+    .withMessage("Nom doit être une chaîne non vide"),
+  body("email")
+    .isEmail()
+    .notEmpty()
+    .withMessage("Email doit etre sous fourmat valide"),
+  body("password")
+    .isString()
+    .isLength({ min: 8 })
+    .notEmpty()
+    .withMessage("Le mot de passe doit etre minimum 8 "),
+];
+const validateRegister = (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+  next();
+};
+module.exports = { addRegisteValidator, validateRegister };

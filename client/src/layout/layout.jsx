@@ -2,6 +2,7 @@ import { Outlet } from "react-router";
 import Sidebar from "../components/sidebar/Sidebar";
 import { useState } from "react";
 import NavComponent from "../components/NavComponent/NavComponent";
+import { ToastContainer } from "react-toastify";
 
 export function Layout() {
   const [isSideOpen, setIsSideOpen] = useState(false);
@@ -40,6 +41,7 @@ export function Layout() {
           <Outlet context={{ globalFilter, setGlobalFilter }} />
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 }

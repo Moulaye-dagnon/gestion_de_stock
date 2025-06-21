@@ -7,8 +7,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(
   cors({
+    origin: [
+      "http://localhost:5173",
+      "https://8f9a-105-68-189-109.ngrok-free.app",
+    ],
     credentials: true,
-    origin: ["http://localhost:5173"],
   })
 );
 

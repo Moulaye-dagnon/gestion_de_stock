@@ -6,23 +6,27 @@ const authenticate = require("../middlewares/authenticate");
 const UpdateProduct = require("../controller/UpdateProduct");
 const {
   UpdateProductValidate,
-  validate,
+  validateUpdate,
 } = require("../Validator/UpdateProductValidator");
+const {
+  addProductValidate,
+  validateProduct,
+} = require("..//Validator/addProduct");
 router.get("/produit/all", authenticate, allProduit);
 router.get("/produit/:id", authenticate, OneProduit);
-router.post("/produit/new", authenticate, addProduct);
-console.log(
-  typeof authenticate,
-  typeof UpdateProductValidate,
-  typeof validate,
-  typeof UpdateProduct
+router.post(
+  "/produit/new",
+  authenticate,
+  addProductValidate,
+  validateProduct,
+  addProduct
 );
 
 router.put(
   "/produit/:id/update",
   authenticate,
   UpdateProductValidate,
-  validate,
+  validateUpdate,
   UpdateProduct
 );
 

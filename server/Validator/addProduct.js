@@ -1,21 +1,17 @@
 const { param, body, validationResult } = require("express-validator");
 const isValidQantity = require("../utils/isValidQantity");
-const UpdateProductValidate = [
-  param("id")
-    .isInt({ min: 1 })
-    .toInt()
-    .withMessage("produitId doit etre un entier positif "),
-  body("fournisseurId")
-    .optional()
-    .isInt({ min: 1 })
-    .toInt()
-    .withMessage("fourisseurId doit etre un entier positif"),
+const addProductValidate = [
   body("nom")
     .optional()
     .isString()
     .trim()
     .notEmpty()
     .withMessage("Nom doit être une chaîne non vide"),
+  body("fournisseurId")
+    .optional()
+    .isInt({ min: 1 })
+    .toInt()
+    .withMessage("fourisseurId doit etre un entier positif"),
   body("categorie")
     .optional()
     .isString()
@@ -40,6 +36,7 @@ const UpdateProductValidate = [
     .trim()
     .notEmpty()
     .withMessage("description doit être une chaîne non vide"),
+  body("quantite").custom(isValidQantity),
   body("seuilApprovisionnement")
     .optional()
     .custom(isValidQantity)
@@ -48,7 +45,7 @@ const UpdateProductValidate = [
     ),
 ];
 
-const validateUpdate = (req, res, next) => {
+const validateProduct = (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
@@ -56,6 +53,6 @@ const validateUpdate = (req, res, next) => {
   next();
 };
 module.exports = {
-  UpdateProductValidate,
-  validateUpdate,
+  addProductValidate,
+  validateProduct,
 };

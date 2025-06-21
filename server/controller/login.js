@@ -17,7 +17,7 @@ const login = async (req, res) => {
     const user = users[0];
     const isPasswordValid = await bcrypt.compare(password, user.motDePasse);
     if (!isPasswordValid) {
-      res.status(401).json({ error: "Votre mot de passe est incorrect" });
+      res.status(403).json({ error: "Votre mot de passe est incorrect" });
     }
 
     const payload = { id: user.id, nom: user.nom, role: user.role };

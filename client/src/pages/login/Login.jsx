@@ -4,9 +4,10 @@ import { InputComponent } from "../../components/InputComponent/InputComponent";
 import ButtonComponent from "../../components/buttonComponent/buttonComponent";
 import { NavLink, useNavigate } from "react-router-dom";
 import { AiOutlineStock } from "react-icons/ai";
-import { login_api } from "../../api/login_api";
 import useForm from "../../hooks/useForm";
 import { UseAuthContext } from "../../Context/AuthContext";
+import { toast, ToastContainer } from "react-toastify";
+import useLoginMutation from "../../hooks/useLoginMutation";
 
 export function Login() {
   const navigate = useNavigate();
@@ -15,12 +16,16 @@ export function Login() {
     email: "",
     password: "",
   };
+  const { mutate } = useLoginMutation({ setUser });
   const onsubmit = (inputValue) => {
-    login_api({
-      email: inputValue.email,
-      password: inputValue.password,
-      navigate: navigate,
-      setUser: setUser,
+    mutate(inputValue, {
+      onSuccess: () => {
+        navigate("/");
+        toast.success("Connexion réussie");
+      },
+      onError: (err) => {
+        toast.error(err.message);
+      },
     });
   };
   const { inputValue, handleChange, handleSubmit } = useForm(
@@ -71,6 +76,7 @@ export function Login() {
             S'inscrire
           </NavLink>
         </small>
+        <ToastContainer />
       </AuthLayout>
     </div>
   );
