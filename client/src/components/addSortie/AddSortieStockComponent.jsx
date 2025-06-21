@@ -6,21 +6,26 @@ import SelectComponent from "../SelectComponent/SelectComponent";
 import { InputComponent } from "../InputComponent/InputComponent";
 import ButtonComponent from "../buttonComponent/ButtonComponent";
 import TextareaComponent from "../TextareaComponent/TextareaComponent";
-
+import useCreateSortieMutation from "../../hooks/useCreateSortieMutation";
+import { toast, ToastContainer } from "react-toastify";
 function AddSortieStockComponent({ usernameId, setAddSortieComponent }) {
   const { isLoading: isLoadingProduct, data: dataProduct } = useProduit();
   const initialeValue = {
     produitId: "",
     utilisateurId: usernameId,
-    quantiteSotie: "",
+    quantiteSortie: "",
     raison: "",
   };
-  //   const { mutate, isSuccess } = useCreateEntreProductMutation();
+  const { mutate } = useCreateSortieMutation();
   const onSubmit = (inputValue) => {
-    console.log(inputValue);
-
-    // mutate(inputValue);
-    // isSuccess && setAddSortieComponent(false);
+    mutate(inputValue, {
+      onSuccess: () => {
+        setAddSortieComponent(false);
+      },
+      onError: (err) => {
+        toast.error(err.message);
+      },
+    });
   };
   const { handleChange, handleSubmit, inputValue } = useForm(
     initialeValue,
@@ -49,10 +54,10 @@ function AddSortieStockComponent({ usernameId, setAddSortieComponent }) {
 
             <InputComponent
               label={"Quantité "}
-              name={"quantiteSotie"}
+              name={"quantiteSortie"}
               type={"number"}
-              value={inputValue.quantiteSotie}
-              id={"quantiteSotie"}
+              value={inputValue.quantiteSortie}
+              id={"quantiteSortie"}
               placeholder={"Entrez la quantité à entrée "}
               handlechange={handleChange}
               addInput={true}
@@ -79,6 +84,7 @@ function AddSortieStockComponent({ usernameId, setAddSortieComponent }) {
           </div>
         </form>
       </div>
+      <ToastContainer />
     </div>
   );
 }

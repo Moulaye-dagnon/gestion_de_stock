@@ -8,11 +8,6 @@ const {
   validate,
 } = require("../Validator/EntreStockValidator");
 router.get("/stock/in/all", getEntreStocks);
-console.log(
-  typeof AddEntreStockValidation,
-  typeof validate,
-  typeof AddEntreStock
-);
 
 router.post("/stock/in/add", AddEntreStockValidation, validate, AddEntreStock);
 router.get("/stock/in/:id/detail", getEntreStocksDetail);

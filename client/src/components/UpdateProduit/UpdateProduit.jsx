@@ -5,34 +5,49 @@ import ButtonComponent from "../buttonComponent/ButtonComponent";
 import useProduitDetail from "../../hooks/useProduitDetail";
 import { useParams } from "react-router";
 import SpinnerComponent from "../Spinner/SpinnerComponent";
+import useUpdateMutation from "../../hooks/useUpdateMutation";
+import SelectComponent from "../SelectComponent/SelectComponent";
+import useSuppliers from "../../hooks/useSuppliers";
 
 function UpdateProduit({ setHideUpdateComponent }) {
   const { produitId } = useParams();
   const { isLoading, data } = useProduitDetail({ id: produitId });
-  if (isLoading) {
-    return <SpinnerComponent />;
-  }
+  const { isLoading: isLoadingSuppliers, data: dataSuppliers } = useSuppliers();
+
   const initialeValue = {
     nom: data.nom,
-    categorie: data.categorie,
-    prixAchat: data.prixAchat,
-    prixVente: data.prixVente,
-    description: data.description,
-    seuilApprovisionnement: data.seuilApprovisionnement,
+    categorie: data?.categorie,
+    fournisseurId: data?.fournisseurId,
+    prixAchat: data?.prixAchat,
+    prixVente: data?.prixVente,
+    description: data?.description,
+    seuilApprovisionnement: data?.seuilApprovisionnement,
   };
-  //   const { mutate } = useCreateProductMutation();
-  const onSubmit = (inputValue) => {
-    console.log(inputValue);
+  const { mutate } = useUpdateMutation({ produitId: produitId });
+  const onSubmit = (productData) => {
+    mutate(
+      { productData },
+      {
+        onSuccess: () => {
+          setHideUpdateComponent(false);
+        },
+
+        onError: (err) => console.log(err.message),
+      }
+    );
   };
   const { inputValue, handleChange, handleSubmit } = useForm(
     initialeValue,
     onSubmit
   );
+  if (isLoading || isLoadingSuppliers) {
+    return <SpinnerComponent />;
+  }
 
   return (
     <div className=" absolute  inset-0  bg-black/50 flex justify-center items-center z-30 ">
       <div className="bg-white rounded-sm h-[90%] w-120 px-7 py-6 flex justify-between flex-col">
-        <div className=" mb-3 font-bold text-xl ">Nouveau Produit</div>
+        <div className=" mb-3 font-bold text-xl ">Mettre a jour le Produit</div>
         <form
           className=" flex-1 flex flex-col overflow-y-auto"
           onSubmit={handleSubmit}
@@ -57,6 +72,14 @@ function UpdateProduit({ setHideUpdateComponent }) {
               placeholder={"Entrez une description"}
               handlechange={handleChange}
               addInput={true}
+            />
+            <SelectComponent
+              items={dataSuppliers}
+              value={inputValue.fournisseurId}
+              title={"Fournisseur"}
+              handleChange={handleChange}
+              name={"fournisseurId"}
+              placeholder={"Selectionner un fournisseur"}
             />
 
             <InputComponent

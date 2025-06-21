@@ -58,15 +58,8 @@ const AddSortieStock = async (req, res) => {
 
       await connexion.commit();
 
-      const [produitMisAJour] = await connexion.execute(
-        "SELECT id, quantiteStock FROM produit WHERE id = ?",
-        [produitId]
-      );
-      console.log("Produit mis à jour:", produitMisAJour[0]);
-
       res.status(200).json({
         message: "Stock mis à jour",
-        produit: produitMisAJour[0],
       });
     } catch (error) {
       await connexion.rollback();

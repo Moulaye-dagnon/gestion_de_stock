@@ -8,12 +8,14 @@ import { flexRender } from "@tanstack/react-table";
 import SpinnerComponent from "../../components/Spinner/SpinnerComponent";
 import ButtonComponent from "../../components/buttonComponent/ButtonComponent";
 import { IoIosArrowRoundForward } from "react-icons/io";
+import AddSupplierComponent from "../../components/addSupplier/AddSupplierComponent";
 
 function Supplier() {
   const navigate = useNavigate();
   const { user, isloading } = UseAuthContext();
-  const [hideAddComponet, setAddEntreComponent] = useState(false);
-  const handleHideAddEntreComponent = () => setAddEntreComponent((c) => !c);
+  const [hideAddComponet, setAddSupplierComponent] = useState(false);
+  const handleHideAddSupplierComponent = () =>
+    setAddSupplierComponent((c) => !c);
 
   useEffect(() => {
     if (!isloading && !user) {
@@ -42,7 +44,7 @@ function Supplier() {
           <div className=" uppercase"> Les fournisseurs</div>
           <div className="flex  items-center">
             <ButtonComponent
-              handleClick={handleHideAddEntreComponent}
+              handleClick={handleHideAddSupplierComponent}
               name={"Nouveau fournisseur "}
             />
           </div>
@@ -121,12 +123,12 @@ function Supplier() {
           </div>
         </div>
       </div>
-      {/* {hideAddComponet && (
-        <AddEntreStockComponent
+      {hideAddComponet && (
+        <AddSupplierComponent
           usernameId={user.id}
-          setAddEntreComponent={setAddEntreComponent}
+          setAddSupplierComponent={setAddSupplierComponent}
         />
-      )} */}
+      )}
     </>
   );
 }

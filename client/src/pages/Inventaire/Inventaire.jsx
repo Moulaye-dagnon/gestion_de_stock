@@ -42,7 +42,6 @@ export function Inventaire() {
   return (
     <>
       <div className=" flex-1 flex flex-col gap-y-2 overflow-auto   w-full ">
-        <OverallComponent title="Inventaire global" />
         <div className=" flex-1   flex flex-col py-2.5 px-1.5 bg-white ">
           <div className="flex justify-between py-1.5">
             <div className=" uppercase">Produit</div>

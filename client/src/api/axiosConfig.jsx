@@ -14,8 +14,6 @@ api.interceptors.response.use(
   async (error) => {
     let originalRequest = error.config;
     if (error.response?.status == 401 && !originalRequest._retry) {
-      console.log(error.response);
-
       originalRequest._retry = true;
       try {
         await axios.post("http://localhost:3000/refresh", null, {
