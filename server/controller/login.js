@@ -19,6 +19,7 @@ const login = async (req, res) => {
     if (!isPasswordValid) {
       res.status(403).json({ error: "Votre mot de passe est incorrect" });
     }
+    console.log(process.env.JWT_secret);
 
     const payload = { id: user.id, nom: user.nom, role: user.role };
     const access_token = jwt.sign(payload, process.env.JWT_secret, {
