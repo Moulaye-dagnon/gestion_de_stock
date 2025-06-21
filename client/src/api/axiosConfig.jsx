@@ -1,6 +1,6 @@
 import axios from "axios";
 export const api = axios.create({
-  baseURL: "http://localhost:3000",
+  baseURL: "https://server-production-dbc8.up.railway.app",
   withCredentials: true,
 });
 
@@ -16,7 +16,7 @@ api.interceptors.response.use(
     if (error.response?.status == 401 && !originalRequest._retry) {
       originalRequest._retry = true;
       try {
-        await axios.post("http://localhost:3000/refresh", null, {
+        await axios.post("https://server-production-dbc8.up.railway.app/refresh", null, {
           withCredentials: true,
         });
         return api(originalRequest);
