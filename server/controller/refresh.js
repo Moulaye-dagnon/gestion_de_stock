@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 const refresh = async (req, res) => {
   const refreshToken = req.cookies.refresh_token;
   if (!refreshToken) {
-    res.status(403).json({ erro: "refreshtoken n'existe pas" });
+    return res.status(403).json({ erro: "refreshtoken n'existe pas" });
   }
   try {
     const [row] = await pool.execute(
