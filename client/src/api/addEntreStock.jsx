@@ -1,0 +1,23 @@
+import React from "react";
+import { api } from "./axiosConfig";
+
+async function addEntreStock(newEntreStock) {
+  try {
+    const response = await api.post("/stock/in/add", {
+      produitId: newEntreStock.produitId,
+      fournisseurId: newEntreStock.fournisseurId,
+      utilisateurId: newEntreStock.utilisateurId,
+      dateEntre: newEntreStock.dateEntre,
+      quantiteEntre: newEntreStock.quantiteEntre,
+      referenceCommandeLivraison: newEntreStock.referenceCommandeLivraison,
+    });
+    return response.data;
+  } catch (error) {
+    const errorMessage = error.response?.data?.errors
+      ? error.response.data.errors.map((err) => err.msg).join(", ")
+      : error.response?.data?.message || error.message;
+    throw new Error(errorMessage);
+  }
+}
+
+export default addEntreStock;

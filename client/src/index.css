@@ -1,0 +1,46 @@
+@import "tailwindcss";
+
+@theme {
+  --default-font-family: "Inter", sans-serif;
+  --default-font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  --default-font-variation-settings: "opsz" 32;
+  --color-my-border: #f0f1f3;
+  --color-my-body: #858d9d;
+  --color-my-handing: #383e49;
+  --color-my-sub-hanging: #5d6679;
+  --color-my-handing: #383e49;
+  --color-my-primary: #1570ef;
+}
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../src//font/Inter_18pt-Regular.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("../src/font/Inter_18pt-Medium.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("../src/font/Inter_18pt-SemiBold.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../src/font/Inter_18pt-Bold.ttf") format("truetype");
+}
+
+body {
+  background-color: #f0f1f3;
+  overflow: hidden;
+}
