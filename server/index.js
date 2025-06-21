@@ -9,7 +9,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:5173",
-      "https://8f9a-105-68-189-109.ngrok-free.app",
+	  "https://mystock-production-2e5a.up.railway.app"
     ],
     credentials: true,
   })
