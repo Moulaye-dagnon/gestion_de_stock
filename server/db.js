@@ -1,4 +1,5 @@
 require("dotenv").config();
+const fs = require("fs");
 const mysql = require("mysql2/promise");
 
 const pool = mysql.createPool({
@@ -10,6 +11,9 @@ const pool = mysql.createPool({
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0,
+  ssl: {
+    ca: fs.readFileSync("./ca.pem"), // Assure-toi que ce fichier contient le bon certificat
+  },
 });
 
 async function testConnection() {
