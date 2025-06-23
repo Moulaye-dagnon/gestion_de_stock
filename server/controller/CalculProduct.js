@@ -13,12 +13,16 @@ const CalculProduct = async (req, res) => {
     const [FinishedProduit] = await pool.execute(
       "SELECT COUNT(*) as FinishedProduit FROM produit WHERE quantiteStock = 0"
     );
+    const [PrixMinMax] = await pool.execute(
+      "SELECT MIN(prixAchat) as prixAchatMin , MAX(prixAchat) as prixAchatMax, MIN(prixVente) AS prixVenteMin , MAX(prixVente) as prixVenteMax   FROM produit "
+    );
 
     const data = {
-      TotalCategorie: Total[0].TotalCategorie,
-      TotalProduit: Total[0].TotalProduit,
-      LowProduit: LowProduit[0].LowProduit,
-      FinishedProduit: FinishedProduit[0].FinishedProduit,
+      TotalCategorie: Total[0].TotalCategorie || null,
+      TotalProduit: Total[0].TotalProduit || null,
+      LowProduit: LowProduit[0].LowProduit || null,
+      FinishedProduit: FinishedProduit[0].FinishedProduit || null,
+      PrixMinMax: PrixMinMax[0],
     };
 
     res.status(200).json({ message: "Donnée chargée", data: data });

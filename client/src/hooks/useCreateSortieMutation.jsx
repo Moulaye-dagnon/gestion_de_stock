@@ -12,6 +12,7 @@ function useCreateSortieMutation() {
       queryClient.invalidateQueries({
         queryKey: ["Produit", newSortieStock.produitId],
       });
+      queryClient.invalidateQueries({ queryKey: ["StatProduit"] });
     },
   });
 }

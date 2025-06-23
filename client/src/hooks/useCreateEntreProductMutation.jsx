@@ -12,6 +12,7 @@ function useCreateEntreProductMutation() {
       queryClient.invalidateQueries({
         queryKey: ["Produit", newEntreStock.produitId],
       });
+      queryClient.invalidateQueries({ queryKey: ["StatProduit"] });
     },
   });
 }

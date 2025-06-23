@@ -6,10 +6,11 @@ import store from "../../assets/store.svg";
 
 import React from "react";
 import { AiOutlineStock } from "react-icons/ai";
+import { FiLogOut } from "react-icons/fi";
 
 function Sidebar() {
   return (
-    <div className="flex flex-col h-full w-full items-center p-5 text-white md:text-black border-r bg-white rounded-r-xl border-my-border  ">
+    <div className="flex flex-col justify-between h-full w-full items-center p-5 text-white md:text-black border-r bg-white rounded-r-xl border-my-border  ">
       <div className=" flex text-black flex-col justify-start  h-1/2 w-full items-center ">
         <div className=" flex items-center justify-between  ">
           <span className="w-10">
@@ -33,7 +34,7 @@ function Sidebar() {
                 <span className="w-5">
                   <img src={Home} alt="" srcset="" />
                 </span>
-                <span>Home</span>
+                <span>Board</span>
               </NavLink>
             </li>
             <li className=" my-4 w-full">
@@ -108,7 +109,12 @@ function Sidebar() {
           </ul>
         </div>
       </div>
-      <div></div>
+      <div className=" flex justify-between items-center">
+        <span className="w-8">
+          <FiLogOut width={"100%"} />
+        </span>
+        <span>Deconnexion</span>
+      </div>
     </div>
   );
 }

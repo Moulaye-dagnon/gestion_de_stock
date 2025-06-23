@@ -2,7 +2,7 @@ const pool = require("../db");
 const gettSuppliers = async (req, res) => {
   try {
     const [row] = await pool.execute(
-      "select id,nom,telephone,adresse from fournisseur "
+      "select id,nom,telephone,adresse from fournisseur ORDER BY id DESC "
     );
     if (row.length == 0)
       return res.status(404).json({ message: "La table fournisseur est vide" });

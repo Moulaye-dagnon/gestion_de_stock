@@ -50,12 +50,6 @@ export function Inventaire() {
                 name={"Ajouter"}
                 handleClick={handleHideAddComponent}
               />
-              <span className=" flex items-center py-2 px-4 border rounded-sm border-my-border ml-2 ">
-                <span className="w-5 mr-2  ">
-                  <IoFilter size={"100%"} />
-                </span>
-                Filtré
-              </span>
             </div>
           </div>
           <div className=" flex-1 px-2 py-2 flex flex-col ">
