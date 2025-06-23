@@ -20,7 +20,7 @@ function AddProduitComponent({ setAddComponent }) {
     quantite: "",
     seuilApprovisionnement: "",
   };
-  const { mutate } = useCreateProductMutation();
+  const { mutate, isPending } = useCreateProductMutation();
   const onSubmit = (inputValue) => {
     mutate(inputValue, {
       onSuccess: () => {
@@ -134,7 +134,10 @@ function AddProduitComponent({ setAddComponent }) {
               handleClick={() => setAddComponent(false)}
             />
 
-            <ButtonComponent name={"Ajouter"} />
+            <ButtonComponent
+              disable={isPending}
+              name={isPending ? "Creation" : "Ajouter"}
+            />
           </div>
         </form>
       </div>

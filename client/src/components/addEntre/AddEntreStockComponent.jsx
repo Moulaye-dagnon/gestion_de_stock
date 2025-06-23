@@ -19,7 +19,7 @@ function AddEntreStockComponent({ setAddEntreComponent, usernameId }) {
     quantiteEntre: "",
     referenceCommandeLivraison: "",
   };
-  const { mutate } = useCreateEntreProductMutation();
+  const { mutate, isPending } = useCreateEntreProductMutation();
   const onSubmit = (inputValue) => {
     mutate(inputValue, {
       onSuccess: () => {
@@ -92,7 +92,7 @@ function AddEntreStockComponent({ setAddEntreComponent, usernameId }) {
               handleClick={() => setAddEntreComponent(false)}
             />
 
-            <ButtonComponent type={"submit"} name={"Ajouter"} />
+            <ButtonComponent disable={isPending} type={"submit"} name={"Ajouter"} />
           </div>
         </form>
       </div>

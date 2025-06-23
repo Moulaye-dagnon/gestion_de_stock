@@ -16,7 +16,7 @@ function AddSortieStockComponent({ usernameId, setAddSortieComponent }) {
     quantiteSortie: "",
     raison: "",
   };
-  const { mutate } = useCreateSortieMutation();
+  const { mutate, isPending } = useCreateSortieMutation();
   const onSubmit = (inputValue) => {
     mutate(inputValue, {
       onSuccess: () => {
@@ -80,7 +80,11 @@ function AddSortieStockComponent({ usernameId, setAddSortieComponent }) {
               handleClick={() => setAddSortieComponent(false)}
             />
 
-            <ButtonComponent type={"submit"} name={"Ajouter"} />
+            <ButtonComponent
+              disable={isPending}
+              type={"submit"}
+              name={isPending ? "Sortie" : "Ajouter"}
+            />
           </div>
         </form>
       </div>
