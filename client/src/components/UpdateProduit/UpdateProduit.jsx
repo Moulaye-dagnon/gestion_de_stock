@@ -8,7 +8,7 @@ import SpinnerComponent from "../Spinner/SpinnerComponent";
 import useUpdateMutation from "../../hooks/useUpdateMutation";
 import SelectComponent from "../SelectComponent/SelectComponent";
 import useSuppliers from "../../hooks/useSuppliers";
-
+import { toast } from "react-toastify";
 function UpdateProduit({ setHideUpdateComponent }) {
   const { produitId } = useParams();
   const { isLoading, data } = useProduitDetail({ id: produitId });
@@ -32,7 +32,7 @@ function UpdateProduit({ setHideUpdateComponent }) {
           setHideUpdateComponent(false);
         },
 
-        onError: (err) => console.log(err.message),
+        onError: (err) => toast.error(err.message),
       }
     );
   };

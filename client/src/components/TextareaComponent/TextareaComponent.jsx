@@ -25,7 +25,6 @@ function TextareaComponent({
           placeholder={placeholder}
           value={value}
           onChange={handlechange}
-          required
           className="block border border-transparent user-invalid:border-red-500  w-full pl-3 grow py-1.5   text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6"
         ></textarea>
       </div>

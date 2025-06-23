@@ -16,7 +16,6 @@ const getEntreStocksDetail = async (req, res) => {
       .status(200)
       .json({ message: "Information d'EntreStock est chargée", data: row[0] });
   } catch (error) {
-    console.log("error ", error);
     res.status(500).json({ error: "Erreur serveur", error });
   }
 };

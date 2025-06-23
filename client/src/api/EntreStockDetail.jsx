@@ -6,8 +6,12 @@ async function EntreStockDetail(id) {
     const response = await api.get(`/stock/in/${id}/detail`);
     return response.data.data;
   } catch (error) {
-    console.log("erreur EntreStock ", error.message);
-    throw new Error(`Failed to fetch EntreStcok: ${error.message}`);
+    const errorMessage = error.response?.data?.errors
+      ? error.response.data.errors.map((err) => err.msg).join(", ")
+      : error.response?.data?.message
+      ? error.response.data.message
+      : error.response?.data?.error || error.message;
+    throw new Error(errorMessage);
   }
 }
 

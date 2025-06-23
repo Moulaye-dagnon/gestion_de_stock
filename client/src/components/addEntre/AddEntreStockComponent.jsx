@@ -16,7 +16,6 @@ function AddEntreStockComponent({ setAddEntreComponent, usernameId }) {
     produitId: "",
     fournisseurId: "",
     utilisateurId: usernameId,
-    dateEntre: "",
     quantiteEntre: "",
     referenceCommandeLivraison: "",
   };
@@ -40,7 +39,7 @@ function AddEntreStockComponent({ setAddEntreComponent, usernameId }) {
   }
   return (
     <div className="  absolute overflow-hidden inset-0  bg-black/50 flex justify-center items-center z-30 ">
-      <div className="bg-white rounded-sm min-h-[80%] w-120 px-7 py-6 flex justify-between flex-col">
+      <div className="bg-white rounded-sm min-h-[60%] w-120 px-7 py-6 flex justify-between flex-col">
         <div className=" mb-3 font-bold text-xl ">Nouvelle Entre</div>
         <form
           className=" flex-1 flex flex-col overflow-y-auto"
@@ -75,16 +74,7 @@ function AddEntreStockComponent({ setAddEntreComponent, usernameId }) {
               handlechange={handleChange}
               addInput={true}
             />
-            <InputComponent
-              label={"Date de l'entrée "}
-              name={"dateEntre"}
-              type={"date"}
-              value={inputValue.dateEntre}
-              id={"dateEntre"}
-              placeholder={"La date d'entrée de la commande "}
-              handlechange={handleChange}
-              addInput={true}
-            />
+
             <InputComponent
               label={"Reference de la livraison"}
               name={"referenceCommandeLivraison"}

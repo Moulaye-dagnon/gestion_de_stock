@@ -6,14 +6,12 @@ import { FiEdit2 } from "react-icons/fi";
 
 function InStockDetail() {
   const { entreStockId } = useParams();
-  console.log(entreStockId);
 
   const { isLoading, isError, error, data } = useEntreStockDtail({
     id: entreStockId,
   });
 
   if (isLoading) return <SpinnerComponent />;
-  console.log(data);
 
   return (
     <div className=" flex-1 flex flex-col m-3 bg-white p-4">

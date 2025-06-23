@@ -1,7 +1,6 @@
 import AuthLayout from "../../components/AuthLAyout/AuthLayout";
 import { InputComponent } from "../../components/InputComponent/InputComponent";
 import ButtonComponent from "../../components/buttonComponent/ButtonComponent";
-import { NavLink, useNavigate } from "react-router-dom";
 import { AiOutlineStock } from "react-icons/ai";
 import useForm from "../../hooks/useForm";
 import { UseAuthContext } from "../../Context/AuthContext";
@@ -9,7 +8,6 @@ import { toast, ToastContainer } from "react-toastify";
 import useLoginMutation from "../../hooks/useLoginMutation";
 
 export function Login() {
-  const navigate = useNavigate();
   const { setUser } = UseAuthContext();
   const initiaValue = {
     email: "",
@@ -19,7 +17,6 @@ export function Login() {
   const onsubmit = (inputValue) => {
     mutate(inputValue, {
       onSuccess: () => {
-        navigate("/");
         toast.success("Connexion réussie");
       },
       onError: (err) => {
@@ -72,6 +69,7 @@ export function Login() {
 
         <ToastContainer />
       </AuthLayout>
+      <ToastContainer />
     </div>
   );
 }

@@ -2,12 +2,14 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { api, setSetUserHandler } from "../api/axiosConfig";
 
 const AuthContext = createContext(null);
+
 export const UseAuthContext = () => {
   return useContext(AuthContext);
 };
 export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [isloading, setIsloading] = useState(true);
+
   useEffect(() => {
     const fetchUser = async () => {
       try {

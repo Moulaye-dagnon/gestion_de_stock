@@ -2,6 +2,7 @@ import React from "react";
 import { api } from "./axiosConfig";
 
 async function addEntreStock(newEntreStock) {
+
   try {
     const response = await api.post("/stock/in/add", {
       produitId: newEntreStock.produitId,

@@ -6,8 +6,12 @@ async function allSortieStock() {
     const response = await api.get("stock/out/all");
     return response.data.data;
   } catch (error) {
-    console.log("erreur Sortie stock ", error.message);
-    throw new Error(`Failed to fetch SortieStock: ${error.message}`);
+    const errorMessage = error.response?.data?.errors
+      ? error.response.data.errors.map((err) => err.msg).join(", ")
+      : error.response?.data?.message
+      ? error.response.data.message
+      : error.response?.data?.error || error.message;
+    throw new Error(errorMessage);
   }
 }
 

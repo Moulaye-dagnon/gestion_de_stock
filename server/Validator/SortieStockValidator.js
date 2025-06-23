@@ -9,9 +9,9 @@ const AddSortieStockValidation = [
     .withMessage("utilisateurId doit etre un entier positif"),
   body("quantiteSortie").custom(isValidQantity),
   body("raison")
+    .optional()
     .isString()
     .trim()
-    .notEmpty()
     .withMessage("Raison doit être une chaîne non vide"),
   ,
 ];

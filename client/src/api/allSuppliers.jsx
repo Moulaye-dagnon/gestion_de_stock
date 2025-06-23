@@ -6,8 +6,12 @@ async function allSuppliers() {
     const response = await api.get("/suppliers/all");
     return response.data.data;
   } catch (error) {
-    console.log("erreur produit ", error.message);
-    throw new Error(`Failed to fetch product: ${error.message}`);
+    const errorMessage = error.response?.data?.errors
+      ? error.response.data.errors.map((err) => err.msg).join(", ")
+      : error.response?.data?.message
+      ? error.response.data.message
+      : error.response?.data?.error || error.message;
+    throw new Error(errorMessage);
   }
 }
 

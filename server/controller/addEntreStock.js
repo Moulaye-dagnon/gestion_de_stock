@@ -65,7 +65,6 @@ const AddEntreStock = async (req, res) => {
         "SELECT id, quantiteStock FROM produit WHERE id = ?",
         [produitId]
       );
-      console.log("Produit mis à jour:", produitMisAJour[0]);
 
       res.status(200).json({
         message: "Stock mis à jour",

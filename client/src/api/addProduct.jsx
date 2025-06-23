@@ -2,6 +2,7 @@ import React from "react";
 import { api } from "./axiosConfig";
 
 async function addProduct(newProduct) {
+
   try {
     const response = await api.post("/produit/new", {
       nom: newProduct.nom,

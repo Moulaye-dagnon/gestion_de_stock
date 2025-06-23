@@ -3,6 +3,7 @@ const normalizeQuantity = require("../utils/NormalizeQantity");
 
 const AddSortieStock = async (req, res) => {
   const { utilisateurId, produitId, quantiteSortie, raison } = req.body;
+
   const connexion = await pool.getConnection();
 
   try {
@@ -26,7 +27,7 @@ const AddSortieStock = async (req, res) => {
       rowProduit[0].quantiteStock
     );
     const quantiteSortieNormalized = normalizeQuantity(quantiteSortie);
-
+    
     if (
       parseFloat(quantiteStockNormalized) < parseFloat(quantiteSortieNormalized)
     ) {
@@ -39,8 +40,8 @@ const AddSortieStock = async (req, res) => {
     await connexion.beginTransaction();
     try {
       await connexion.execute(
-        "INSERT INTO `sortieStock` (`produitId`, `utilisateurId`, `quantiteSortie`, `raison`) VALUES (?, ?, ?, ?)",
-        [produitId, utilisateurId, quantiteSortieNormalized, raison]
+        "INSERT INTO `sortiestock` (`produitId`, `utilisateurId`, `quantiteSortie`, `raison`) VALUES (?, ?, ?, ?)",
+        [produitId, utilisateurId, quantiteSortieNormalized, raison || null]
       );
 
       const totalQuantite = (
