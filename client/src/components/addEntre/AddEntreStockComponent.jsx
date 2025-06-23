@@ -7,6 +7,7 @@ import SelectComponent from "../SelectComponent/SelectComponent";
 import { InputComponent } from "../InputComponent/InputComponent";
 import ButtonComponent from "../buttonComponent/ButtonComponent";
 import SpinnerComponent from "../Spinner/SpinnerComponent";
+import { toast, ToastContainer } from "react-toastify";
 
 function AddEntreStockComponent({ setAddEntreComponent, usernameId }) {
   const { isLoading: isLoadingSuppliers, data: dataSuppliers } = useSuppliers();
@@ -19,10 +20,16 @@ function AddEntreStockComponent({ setAddEntreComponent, usernameId }) {
     quantiteEntre: "",
     referenceCommandeLivraison: "",
   };
-  const { mutate, isSuccess } = useCreateEntreProductMutation();
+  const { mutate } = useCreateEntreProductMutation();
   const onSubmit = (inputValue) => {
-    mutate(inputValue);
-    isSuccess && setAddEntreComponent(false);
+    mutate(inputValue, {
+      onSuccess: () => {
+        setAddEntreComponent(false);
+      },
+      onError: (err) => {
+        toast.error(err.message);
+      },
+    });
   };
   const { handleChange, handleSubmit, inputValue } = useForm(
     initialeValue,
@@ -99,6 +106,7 @@ function AddEntreStockComponent({ setAddEntreComponent, usernameId }) {
           </div>
         </form>
       </div>
+      <ToastContainer />
     </div>
   );
 }

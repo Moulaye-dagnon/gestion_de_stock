@@ -98,7 +98,11 @@ function App() {
     },
     {
       path: "/register",
-      element: <Register />,
+      element: (
+        <PrivateRoute>
+          <Register />
+        </PrivateRoute>
+      ),
     },
     {
       path: "/login",

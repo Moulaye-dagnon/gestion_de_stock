@@ -69,12 +69,7 @@ export function Login() {
             />
           </div>
         </form>
-        <small className="mt-2">
-          Vous n'avez pas de compte?
-          <NavLink className=" underline text-blue-400" to={"/register"}>
-            S'inscrire
-          </NavLink>
-        </small>
+
         <ToastContainer />
       </AuthLayout>
     </div>

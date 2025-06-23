@@ -6,6 +6,7 @@ import SelectComponent from "../SelectComponent/SelectComponent";
 import useForm from "../../hooks/useForm";
 import useCreateProductMutation from "../../hooks/useCreateProductMutation";
 import SpinnerComponent from "../Spinner/SpinnerComponent";
+import { toast, ToastContainer } from "react-toastify";
 
 function AddProduitComponent({ setAddComponent }) {
   const { isLoading: isLoadingSuppliers, data } = useSuppliers();
@@ -21,7 +22,14 @@ function AddProduitComponent({ setAddComponent }) {
   };
   const { mutate } = useCreateProductMutation();
   const onSubmit = (inputValue) => {
-    mutate(inputValue);
+    mutate(inputValue, {
+      onSuccess: () => {
+        setAddComponent(false);
+      },
+      onError: (err) => {
+        toast.error(err.message);
+      },
+    });
   };
   const { inputValue, handleChange, handleSubmit } = useForm(
     initialeValue,
@@ -130,6 +138,7 @@ function AddProduitComponent({ setAddComponent }) {
           </div>
         </form>
       </div>
+      <ToastContainer />
     </div>
   );
 }

@@ -1,4 +1,5 @@
 const { param, body, validationResult } = require("express-validator");
+const pool = require("../db");
 const isValidQantity = require("../utils/isValidQantity");
 const addProductValidate = [
   body("nom")
@@ -6,7 +7,18 @@ const addProductValidate = [
     .isString()
     .trim()
     .notEmpty()
-    .withMessage("Nom doit être une chaîne non vide"),
+    .withMessage("Nom doit être une chaîne non vide")
+    .custom(async (value) => {
+      const [rows] = await pool.execute(
+        "SELECT id FROM produit WHERE nom = ?",
+        [value]
+      );
+      if (rows.length > 0) {
+        throw new Error("Un produit avec ce nom existe déjà");
+      }
+      return true;
+    }),
+  ,
   body("fournisseurId")
     .optional()
     .isInt({ min: 1 })
