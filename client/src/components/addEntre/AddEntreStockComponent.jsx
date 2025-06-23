@@ -11,6 +11,7 @@ import { toast, ToastContainer } from "react-toastify";
 
 function AddEntreStockComponent({ setAddEntreComponent, usernameId }) {
   const { isLoading: isLoadingSuppliers, data: dataSuppliers } = useSuppliers();
+
   const { isLoading: isLoadingProduct, data: dataProduct } = useProduit();
   const initialeValue = {
     produitId: "",
@@ -39,7 +40,7 @@ function AddEntreStockComponent({ setAddEntreComponent, usernameId }) {
   }
   return (
     <div className="  absolute overflow-hidden inset-0  bg-black/50 flex justify-center items-center z-30 ">
-      <div className="bg-white rounded-sm min-h-[60%] w-120 px-7 py-6 flex justify-between flex-col">
+      <div className="bg-white rounded-sm min-h-[80%] w-120 px-7 py-6 flex justify-between flex-col">
         <div className=" mb-3 font-bold text-xl ">Nouvelle Entre</div>
         <form
           className=" flex-1 flex flex-col overflow-y-auto"
@@ -47,7 +48,7 @@ function AddEntreStockComponent({ setAddEntreComponent, usernameId }) {
         >
           <div className=" flex-1  ">
             <SelectComponent
-              items={dataProduct}
+              items={dataProduct || []}
               value={inputValue.produitId}
               title={"Produit"}
               handleChange={handleChange}
@@ -56,7 +57,7 @@ function AddEntreStockComponent({ setAddEntreComponent, usernameId }) {
             />
 
             <SelectComponent
-              items={dataSuppliers}
+              items={dataSuppliers || []}
               value={inputValue.fournisseurId}
               title={"Fournisseur"}
               handleChange={handleChange}
@@ -92,7 +93,16 @@ function AddEntreStockComponent({ setAddEntreComponent, usernameId }) {
               handleClick={() => setAddEntreComponent(false)}
             />
 
-            <ButtonComponent disable={isPending} type={"submit"} name={"Ajouter"} />
+            <ButtonComponent
+              disabled={
+                isPending ||
+                !inputValue.produitId ||
+                !inputValue.fournisseurId ||
+                !inputValue.quantiteEntre
+              }
+              type={"submit"}
+              name={"Ajouter"}
+            />
           </div>
         </form>
       </div>

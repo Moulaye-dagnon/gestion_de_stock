@@ -36,7 +36,7 @@ function AddSortieStockComponent({ usernameId, setAddSortieComponent }) {
   }
   return (
     <div className="  absolute overflow-hidden inset-0  bg-black/50 flex justify-center items-center z-30 ">
-      <div className="bg-white rounded-sm min-h-[50%] w-120 px-7 py-6 flex justify-between flex-col">
+      <div className="bg-white rounded-sm min-h-[80%] w-120 px-7 py-6 flex justify-between flex-col">
         <div className=" mb-3 font-bold text-xl ">Nouvelle Sortie</div>
         <form
           className=" flex-1 flex flex-col overflow-y-auto"
@@ -81,9 +81,11 @@ function AddSortieStockComponent({ usernameId, setAddSortieComponent }) {
             />
 
             <ButtonComponent
-              disable={isPending}
+              disable={
+                isPending || !inputValue.produitId || !inputValue.quantiteSortie
+              }
               type={"submit"}
-              name={isPending ? "Sortie" : "Ajouter"}
+              name={isPending ? "Attend.." : "Ajouter"}
             />
           </div>
         </form>
