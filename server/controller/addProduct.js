@@ -4,7 +4,7 @@ const addProduct = async (req, res) => {
   const {
     nom,
     fournisseurId,
-    categorie,
+    categorieId,
     prixAchat,
     prixVente,
     description,
@@ -12,14 +12,13 @@ const addProduct = async (req, res) => {
     seuilApprovisionnement,
   } = req.body;
 
-  const CategorieUpper = categorie.toUpperCase();
   try {
     const [row] = await pool.execute(
-      "INSERT INTO `produit` ( `fournisseurId`, `nom`, `categorie`, `prixAchat`, `prixVente`, `description`, `quantiteStock`, `seuilApprovisionnement`) VALUES (?,?,?,?,?,?,?,?)",
+      "INSERT INTO `produit` ( `fournisseurId`, `nom`, `categorieId`, `prixAchat`, `prixVente`, `description`, `quantiteStock`, `seuilApprovisionnement`) VALUES (?,?,?,?,?,?,?,?)",
       [
         fournisseurId,
         nom,
-        CategorieUpper,
+        categorieId,
         prixAchat,
         prixVente,
         description,

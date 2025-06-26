@@ -6,7 +6,7 @@ const UpdateProduct = async (req, res) => {
   const {
     nom,
     fournisseurId,
-    categorie,
+    categorieId,
     prixAchat,
     prixVente,
     description,
@@ -55,9 +55,9 @@ const UpdateProduct = async (req, res) => {
       fieldsToUpdate.push("nom = ?");
       values.push(nom);
     }
-    if (categorie !== undefined) {
-      fieldsToUpdate.push("categorie = ?");
-      values.push(categorie);
+    if (categorieId !== undefined) {
+      fieldsToUpdate.push("categorieId = ?");
+      values.push(categorieId);
     }
     if (normalizedFields.prixAchat !== undefined) {
       fieldsToUpdate.push("prixAchat = ?");
@@ -98,7 +98,7 @@ const UpdateProduct = async (req, res) => {
       await connexion.commit();
 
       const [produitMisAJour] = await connexion.execute(
-        "SELECT id, fournisseurId, nom, categorie, prixAchat, prixVente, description, seuilApprovisionnement, quantiteStock FROM produit WHERE id = ?",
+        "SELECT id, fournisseurId, nom, categorieId, prixAchat, prixVente, description, seuilApprovisionnement, quantiteStock FROM produit WHERE id = ?",
         [produitId]
       );
 

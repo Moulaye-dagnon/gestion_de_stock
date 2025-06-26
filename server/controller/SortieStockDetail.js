@@ -3,7 +3,7 @@ const getStockStocksDetail = async (req, res) => {
   const sortieStockId = req.params.id;
   try {
     const [row] = await pool.execute(
-      "SELECT S.dateSortie  , S.quantiteSortie, S.raison ,  P.nom as Produit,P.prixVente as ProduitprixVente , P.categorie as categorieProduit , U.nom as Utilisateur   FROM sortiestock S  JOIN produit P ON S.produitId = P.id   JOIN utilisateur U ON S.utilisateurId = U.id WHERE S.id = ? ",
+      "SELECT S.dateSortie  , S.quantiteSortie, S.raison ,  P.nom as Produit,P.prixVente as ProduitprixVente , c.nom as categorieProduit , U.nom as Utilisateur, cl.nom as client   FROM sortiestock S  JOIN produit P ON S.produitId = P.id   JOIN utilisateur U ON S.utilisateurId = U.id JOIN categorie c ON P.categorieId = c.id JOIN client cl on S.clientId = cl.id WHERE S.id = ? ",
       [sortieStockId]
     );
 

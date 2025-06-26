@@ -8,7 +8,7 @@ const CalculProduct = async (req, res) => {
 
     const [stats] = await connexion.execute(`
       SELECT 
-        COUNT(DISTINCT categorie) AS TotalCategorie,
+        COUNT(DISTINCT categorieId) AS TotalCategorie,
         COUNT(*) AS TotalProduit,
         SUM(quantiteStock <= seuilApprovisionnement) AS LowProduit,
         SUM(quantiteStock = 0) AS FinishedProduit,

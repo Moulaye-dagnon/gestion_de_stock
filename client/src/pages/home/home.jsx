@@ -13,7 +13,7 @@ export function Home() {
   }, [user, isloading, navigate]);
   return (
     <div className="flex-1 px-4 flex flex-col gap-y-2 overflow-auto   w-full">
-      <OverallComponent title="Inventaire global" />
+      <OverallComponent  />
     </div>
   );
 }

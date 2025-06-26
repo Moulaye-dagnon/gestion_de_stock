@@ -3,7 +3,7 @@ const getOneProduit = async (req, res) => {
   const produitId = req.params.id;
   try {
     const [row] = await pool.execute(
-      "SELECT p.*, f.nom as nomfournisseur , f.telephone,f.adresse FROM produit p JOIN fournisseur f ON p.fournisseurId = f.id WHERE p.id = ? ",
+      "SELECT p.nom,p.prixAchat,p.prixVente,p.description,p.quantiteStock,p.seuilApprovisionnement, c.nom as categorie, f.nom as nomfournisseur , f.telephone,f.adresse FROM produit p JOIN categorie c ON p.categorieId = c.id JOIN fournisseur f ON p.fournisseurId = f.id WHERE p.id = ? ",
       [produitId]
     );
     if (row.length == 0)

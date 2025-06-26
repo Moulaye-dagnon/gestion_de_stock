@@ -2,7 +2,7 @@ const pool = require("../db");
 const getSortieStock = async (req, res) => {
   try {
     const [row] = await pool.execute(
-      "SELECT S.id, P.nom as produit,  S.quantiteSortie , S.dateSortie FROM sortiestock S JOIN produit P ON P.id = S.produitId ORDER BY id DESC"
+      "SELECT S.id, P.nom AS produit,  S.quantiteSortie, S.dateSortie,  c.nom AS client FROM sortiestock S JOIN produit P ON P.id = S.produitId LEFT JOIN client c ON S.clientId = c.id ORDER BY S.id DESC"
     );
     if (row.length == 0)
       return res.status(404).json({ message: "La table EntréStock est vide" });

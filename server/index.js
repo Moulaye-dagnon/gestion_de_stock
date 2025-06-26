@@ -9,7 +9,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:5173",
-	  "https://mystock-production-2e5a.up.railway.app"
+      "https://mystock-production-2e5a.up.railway.app",
     ],
     credentials: true,
   })
@@ -23,12 +23,16 @@ const supplier = require("./route/supplier");
 const InStock = require("./route/INStock");
 const OutStock = require("./route/OutStock");
 const Statistiques = require("./route/Stat");
+const categorie = require("./route/Categorie");
+const client = require("./route/client");
 app.use("", authRoute);
 app.use("", product);
 app.use("", supplier);
 app.use("", InStock);
 app.use("", OutStock);
 app.use("", Statistiques);
+app.use("", categorie);
+app.use("", client);
 app.listen(port, (req, res) => {
   console.log("server lance sur le port", port);
 });

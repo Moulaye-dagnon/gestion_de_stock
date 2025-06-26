@@ -2,7 +2,7 @@ import React from "react";
 import useStatProduit from "../../hooks/useStatProduit";
 import SpinnerComponent from "../Spinner/SpinnerComponent";
 
-function OverallComponent({ title = "Inventaire global" }) {
+function OverallComponent() {
   const { isLoading, data } = useStatProduit();
 
   if (isLoading) return <SpinnerComponent />;

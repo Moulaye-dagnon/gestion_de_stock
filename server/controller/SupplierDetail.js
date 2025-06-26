@@ -17,7 +17,7 @@ const getSupplierDetail = async (req, res) => {
     }
 
     const [produitSupplier] = await connexion.execute(
-      "SELECT  p.nom, p.categorie FROM produit p JOIN fournisseur f ON p.fournisseurId = f.id WHERE f.id = ?",
+      "SELECT  p.nom,c.nom as categorie FROM produit p JOIN fournisseur f ON p.fournisseurId = f.id JOIN categorie c ON p.categorieId = c.id WHERE f.id = ?",
       [supplierId]
     );
 

@@ -7,13 +7,15 @@ import useForm from "../../hooks/useForm";
 import useCreateProductMutation from "../../hooks/useCreateProductMutation";
 import SpinnerComponent from "../Spinner/SpinnerComponent";
 import { toast, ToastContainer } from "react-toastify";
+import useCategorie from "../../hooks/useCategorie";
 
 function AddProduitComponent({ setAddComponent }) {
   const { isLoading: isLoadingSuppliers, data } = useSuppliers();
+  const { isLoading: isLoadingCategorie, data: dataCategorie } = useCategorie();
   const initialeValue = {
     nom: "",
     fournisseurId: "",
-    categorie: "",
+    categorieId: "",
     prixAchat: "",
     prixVente: "",
     description: "",
@@ -30,12 +32,13 @@ function AddProduitComponent({ setAddComponent }) {
         toast.error(err.message);
       },
     });
+    // console.log(inputValue);
   };
   const { inputValue, handleChange, handleSubmit } = useForm(
     initialeValue,
     onSubmit
   );
-  if (isLoadingSuppliers) {
+  if (isLoadingSuppliers || isLoadingCategorie) {
     return <SpinnerComponent />;
   }
   return (
@@ -86,15 +89,13 @@ function AddProduitComponent({ setAddComponent }) {
               handlechange={handleChange}
               addInput={true}
             />
-            <InputComponent
-              label={"Categorie"}
-              name={"categorie"}
-              type={"text"}
-              value={inputValue.categorie}
-              id={"categorie"}
-              placeholder={"Entrez  la categorie"}
-              handlechange={handleChange}
-              addInput={true}
+            <SelectComponent
+              items={dataCategorie}
+              value={inputValue.categorieId}
+              title={"Categorie"}
+              handleChange={handleChange}
+              name={"categorieId"}
+              placeholder={"Selectionner une categorie"}
             />
             <InputComponent
               label={"Prix de vente"}
@@ -108,7 +109,7 @@ function AddProduitComponent({ setAddComponent }) {
             />
 
             <InputComponent
-              label={"Quantité"}
+              label={"Quantité initial"}
               name={"quantite"}
               type={"number"}
               value={inputValue.quantite}

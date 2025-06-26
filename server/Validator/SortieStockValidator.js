@@ -7,6 +7,9 @@ const AddSortieStockValidation = [
   body("utilisateurId")
     .isInt({ min: 1 })
     .withMessage("utilisateurId doit etre un entier positif"),
+  body("clientId")
+    .isInt({ min: 1 })
+    .withMessage("clientId doit etre un entier positif"),
   body("quantiteSortie").custom(isValidQantity),
   body("raison")
     .optional()

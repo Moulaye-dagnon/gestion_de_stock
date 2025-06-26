@@ -8,12 +8,15 @@ import ButtonComponent from "../buttonComponent/ButtonComponent";
 import TextareaComponent from "../TextareaComponent/TextareaComponent";
 import useCreateSortieMutation from "../../hooks/useCreateSortieMutation";
 import { toast, ToastContainer } from "react-toastify";
+import useClient from "../../hooks/useClient";
 function AddSortieStockComponent({ usernameId, setAddSortieComponent }) {
   const { isLoading: isLoadingProduct, data: dataProduct } = useProduit();
+  const { isLoading: isLoadingClient, data: dataClient } = useClient();
   const initialeValue = {
     produitId: "",
     utilisateurId: usernameId,
     quantiteSortie: "",
+    clientId: "",
     raison: "",
   };
   const { mutate, isPending } = useCreateSortieMutation();
@@ -31,7 +34,7 @@ function AddSortieStockComponent({ usernameId, setAddSortieComponent }) {
     initialeValue,
     onSubmit
   );
-  if (isLoadingProduct) {
+  if (isLoadingProduct || isLoadingClient) {
     return <SpinnerComponent />;
   }
   return (
@@ -43,6 +46,14 @@ function AddSortieStockComponent({ usernameId, setAddSortieComponent }) {
           onSubmit={handleSubmit}
         >
           <div className=" flex-1  ">
+            <SelectComponent
+              items={dataClient}
+              value={inputValue.clientId}
+              title={"Produit"}
+              handleChange={handleChange}
+              name={"clientId"}
+              placeholder={"Selectionner le client"}
+            />
             <SelectComponent
               items={dataProduct}
               value={inputValue.produitId}

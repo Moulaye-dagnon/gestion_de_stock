@@ -4,7 +4,7 @@ const getEntreStocksDetail = async (req, res) => {
   const entrestockId = req.params.id;
   try {
     const [row] = await pool.execute(
-      "SELECT E.dateEntre,E.quantiteEntre, E.referenceCommandeLivraison , P.nom as Produit,P.prixAchat as ProduitPrixAchat , P.categorie as categorieProduit , P.quantiteStock  ,F.nom as Fournisseur , U.nom as Utilisateur FROM entrestock E  JOIN produit P ON E.produitId = P.id   JOIN fournisseur F ON E.fournisseurId = F.id  JOIN utilisateur U ON E.utilisateurId = U.id  WHERE E.id = ?",
+      "SELECT E.dateEntre,E.quantiteEntre, E.referenceCommandeLivraison , P.nom as Produit,P.prixAchat as ProduitPrixAchat ,c.nom as categorieProduit , P.quantiteStock  ,F.nom as Fournisseur , U.nom as Utilisateur FROM entrestock E  JOIN produit P ON E.produitId = P.id   JOIN fournisseur F ON E.fournisseurId = F.id JOIN categorie c On P.categorieId = c.id  JOIN utilisateur U ON E.utilisateurId = U.id  WHERE E.id = ?",
       [entrestockId]
     );
     if (row.length == 0)
