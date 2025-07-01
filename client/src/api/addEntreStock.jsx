@@ -2,16 +2,8 @@ import React from "react";
 import { api } from "./axiosConfig";
 
 async function addEntreStock(newEntreStock) {
-
   try {
-    const response = await api.post("/stock/in/add", {
-      produitId: newEntreStock.produitId,
-      fournisseurId: newEntreStock.fournisseurId,
-      utilisateurId: newEntreStock.utilisateurId,
-      dateEntre: newEntreStock.dateEntre,
-      quantiteEntre: newEntreStock.quantiteEntre,
-      referenceCommandeLivraison: newEntreStock.referenceCommandeLivraison,
-    });
+    const response = await api.post("/stock/in/add", newEntreStock);
     return response.data;
   } catch (error) {
     const errorMessage = error.response?.data?.errors

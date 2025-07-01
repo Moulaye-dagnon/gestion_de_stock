@@ -2,12 +2,7 @@ import { api } from "./axiosConfig";
 
 async function addSortieStock(newSortie) {
   try {
-    const response = await api.post("stock/out/add", {
-      produitId: newSortie.produitId,
-      utilisateurId: newSortie.utilisateurId,
-      quantiteSortie: newSortie.quantiteSortie,
-      raison: newSortie.raison,
-    });
+    const response = await api.post("stock/out/add", newSortie);
     return response.data.message;
   } catch (error) {
     const errorMessage = error.response?.data?.errors

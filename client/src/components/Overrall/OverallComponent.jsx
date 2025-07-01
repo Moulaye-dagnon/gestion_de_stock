@@ -18,16 +18,7 @@ function OverallComponent() {
   } = data;
 
   // Données pour les cartes
-  const stats = [
-    { title: "Total Produits", value: TotalProduit },
-    { title: "Catégories", value: TotalCategorie },
-    { title: "Stock Bas", value: LowProduit },
-    { title: "Rupture Stock", value: FinishedProduit },
-    { title: "Prix Achat Min", value: prixAchatMin },
-    { title: "Prix Achat Max", value: prixAchatMax },
-    { title: "Prix Vente Min", value: prixVenteMin },
-    { title: "Prix Vente Max", value: prixVenteMax },
-  ];
+ 
 
   return (
     <div className="container mx-auto p-2">

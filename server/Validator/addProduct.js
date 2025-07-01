@@ -3,7 +3,6 @@ const pool = require("../db");
 const isValidQantity = require("../utils/isValidQantity");
 const addProductValidate = [
   body("nom")
-    .optional()
     .isString()
     .trim()
     .notEmpty()
@@ -38,7 +37,6 @@ const addProductValidate = [
       "prix de vente doit être  entiere ou une demi-unité (ex. : 1, 2.5) "
     ),
   body("description")
-    .optional()
     .isString()
     .trim()
     .notEmpty()

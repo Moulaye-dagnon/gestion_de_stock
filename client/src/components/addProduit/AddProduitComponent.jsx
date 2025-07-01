@@ -9,7 +9,7 @@ import SpinnerComponent from "../Spinner/SpinnerComponent";
 import { toast, ToastContainer } from "react-toastify";
 import useCategorie from "../../hooks/useCategorie";
 
-function AddProduitComponent({ setAddComponent }) {
+function AddProduitComponent({ setAddCategorie, setAddComponent }) {
   const { isLoading: isLoadingSuppliers, data } = useSuppliers();
   const { isLoading: isLoadingCategorie, data: dataCategorie } = useCategorie();
   const initialeValue = {
@@ -32,7 +32,10 @@ function AddProduitComponent({ setAddComponent }) {
         toast.error(err.message);
       },
     });
-    // console.log(inputValue);
+  };
+
+  const handleAddCategorie = () => {
+    setAddCategorie((prev) => !prev);
   };
   const { inputValue, handleChange, handleSubmit } = useForm(
     initialeValue,
@@ -41,6 +44,7 @@ function AddProduitComponent({ setAddComponent }) {
   if (isLoadingSuppliers || isLoadingCategorie) {
     return <SpinnerComponent />;
   }
+
   return (
     <div className=" absolute overflow-hidden inset-0  bg-black/50 flex justify-center items-center z-30 ">
       <div className="bg-white rounded-sm h-[90%] w-120 px-7 py-6 flex justify-between flex-col">
@@ -90,12 +94,15 @@ function AddProduitComponent({ setAddComponent }) {
               addInput={true}
             />
             <SelectComponent
+              className={"flex-1 "}
               items={dataCategorie}
               value={inputValue.categorieId}
               title={"Categorie"}
               handleChange={handleChange}
               name={"categorieId"}
               placeholder={"Selectionner une categorie"}
+              productSelect={true}
+              handleAddCategorie={handleAddCategorie}
             />
             <InputComponent
               label={"Prix de vente"}
@@ -136,7 +143,16 @@ function AddProduitComponent({ setAddComponent }) {
             />
 
             <ButtonComponent
-              disable={isPending}
+              disable={
+                isPending ||
+                !inputValue.nom ||
+                !inputValue.fournisseurId ||
+                !inputValue.categorieId ||
+                !inputValue.prixAchat ||
+                !inputValue.prixVente ||
+                !inputValue.quantite ||
+                !inputValue.seuilApprovisionnement
+              }
               name={isPending ? "Creation" : "Ajouter"}
             />
           </div>

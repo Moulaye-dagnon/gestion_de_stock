@@ -49,7 +49,7 @@ function AddSortieStockComponent({ usernameId, setAddSortieComponent }) {
             <SelectComponent
               items={dataClient}
               value={inputValue.clientId}
-              title={"Produit"}
+              title={"Le client"}
               handleChange={handleChange}
               name={"clientId"}
               placeholder={"Selectionner le client"}

@@ -13,10 +13,13 @@ import AddProduitComponent from "../../components/addProduit/AddProduitComponent
 import SpinnerComponent from "../../components/Spinner/SpinnerComponent";
 import columnsProduct from "../../tanStack/Columns/ProductColumn";
 import getDisponibiliteLabel from "../../utils/DisponibiliteLabel";
+import AddCategorieComponent from "../../components/addCategorie/AddCategorieComponent";
 
 export function Inventaire() {
   const navigate = useNavigate();
   const [hideAddComponet, setAddComponent] = useState(false);
+  const [filterQuantite, setFilterQuantite] = useState("Tout");
+  const [hideAddCategorieComponent, setAddCategorieComponent] = useState(false);
   const handleHideAddComponent = () => setAddComponent((c) => !c);
   const { user, isloading } = UseAuthContext();
   useEffect(() => {
@@ -31,6 +34,7 @@ export function Inventaire() {
     globalFilter: propsOutlet.globalFilter,
     setGlobalFilter: propsOutlet.setGlobalFilter,
     columns: columnsProduct,
+    quantiteFilter: filterQuantite,
   });
   if (isLoading) {
     return <SpinnerComponent />;
@@ -50,6 +54,17 @@ export function Inventaire() {
                 name={"Ajouter"}
                 handleClick={handleHideAddComponent}
               />
+              <span>
+                <select
+                  value={filterQuantite}
+                  onChange={(e) => setFilterQuantite(e.target.value)}
+                  className="border px-3 py-1 rounded-md mb-4"
+                >
+                  <option value="Tout">Tout</option>
+                  <option value="Faible">Faible</option>
+                  <option value="Fini">Fini</option>
+                </select>
+              </span>
             </div>
           </div>
           <div className=" flex-1 px-2 py-2 flex flex-col ">
@@ -136,8 +151,15 @@ export function Inventaire() {
           </div>
         </div>
       </div>
+
       {hideAddComponet && (
-        <AddProduitComponent setAddComponent={setAddComponent} />
+        <AddProduitComponent
+          setAddComponent={setAddComponent}
+          setAddCategorie={setAddCategorieComponent}
+        />
+      )}
+      {hideAddCategorieComponent && (
+        <AddCategorieComponent setAddCategorie={setAddCategorieComponent} />
       )}
     </>
   );

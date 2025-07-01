@@ -22,6 +22,14 @@ const columnsProduct = [
   columnHelper.accessor("quantiteStock", {
     cell: (info) => info.getValue(),
     header: () => <span className="flex item-center">Quantité</span>,
+    filterFn: (row, columnId, value) => {
+      const quantite = row.getValue(columnId);
+      if (value === "Tout") return true;
+      if (value === "Faible")
+        return quantite <= row.original.seuilApprovisionnement && quantite > 0; // Example threshold for low stock
+      if (value === "Fini") return quantite === 0; // Example for out of stock
+      return false;
+    },
   }),
 ];
 

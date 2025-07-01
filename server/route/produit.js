@@ -1,9 +1,9 @@
 const router = require("express").Router();
-const allProduit = require("../controller/product");
-const OneProduit = require("../controller/productDeetail");
-const addProduct = require("../controller/addProduct");
+const allProduit = require("../controller/Produit/product");
+const OneProduit = require("../controller/Produit/productDeetail");
+const addProduct = require("../controller/Produit/addProduct");
 const authenticate = require("../middlewares/authenticate");
-const UpdateProduct = require("../controller/UpdateProduct");
+const UpdateProduct = require("../controller/Produit/UpdateProduct");
 const {
   UpdateProductValidate,
   validateUpdate,
