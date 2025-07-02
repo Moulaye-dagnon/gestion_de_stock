@@ -47,7 +47,7 @@ function Client() {
             <div className=" uppercase">Clients</div>
             <div className="flex  items-center">
               <ButtonComponent
-                name={"Ajouter"}
+                name={"Nouveau client"}
                 handleClick={handleAddClientComponent}
               />
             </div>

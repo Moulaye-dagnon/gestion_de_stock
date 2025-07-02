@@ -18,7 +18,6 @@ import AddCategorieComponent from "../../components/addCategorie/AddCategorieCom
 export function Inventaire() {
   const navigate = useNavigate();
   const [hideAddComponet, setAddComponent] = useState(false);
-  const [filterQuantite, setFilterQuantite] = useState("Tout");
   const [hideAddCategorieComponent, setAddCategorieComponent] = useState(false);
   const handleHideAddComponent = () => setAddComponent((c) => !c);
   const { user, isloading } = UseAuthContext();
@@ -29,12 +28,12 @@ export function Inventaire() {
   }, [user, isloading, navigate]);
   const { isLoading, error, data } = useProduit();
   const propsOutlet = useOutletContext();
+
   const table = TanStackTable({
     Data: data,
     globalFilter: propsOutlet.globalFilter,
     setGlobalFilter: propsOutlet.setGlobalFilter,
     columns: columnsProduct,
-    quantiteFilter: filterQuantite,
   });
   if (isLoading) {
     return <SpinnerComponent />;
@@ -51,20 +50,9 @@ export function Inventaire() {
             <div className=" uppercase">Produit</div>
             <div className="flex  items-center">
               <ButtonComponent
-                name={"Ajouter"}
+                name={"Nouveau produit"}
                 handleClick={handleHideAddComponent}
               />
-              <span>
-                <select
-                  value={filterQuantite}
-                  onChange={(e) => setFilterQuantite(e.target.value)}
-                  className="border px-3 py-1 rounded-md mb-4"
-                >
-                  <option value="Tout">Tout</option>
-                  <option value="Faible">Faible</option>
-                  <option value="Fini">Fini</option>
-                </select>
-              </span>
             </div>
           </div>
           <div className=" flex-1 px-2 py-2 flex flex-col ">

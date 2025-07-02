@@ -130,7 +130,7 @@ function UpdateProduit({ setHideUpdateComponent }) {
               handleClick={() => setHideUpdateComponent(false)}
             />
 
-            <ButtonComponent name={"Ajouter"} />
+            <ButtonComponent name={"Modifier"} />
           </div>
         </form>
       </div>

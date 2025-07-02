@@ -12,6 +12,7 @@ import useClient from "../../hooks/useClient";
 function AddSortieStockComponent({ usernameId, setAddSortieComponent }) {
   const { isLoading: isLoadingProduct, data: dataProduct } = useProduit();
   const { isLoading: isLoadingClient, data: dataClient } = useClient();
+
   const initialeValue = {
     produitId: "",
     utilisateurId: usernameId,

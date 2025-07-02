@@ -34,14 +34,6 @@ const ProduitStockKpi = async (req, res) => {
       LIMIT 3
     `);
 
-    // Requête pour StockKpi
-    const [TotalStockCategorie] = await connexion.execute(`
-      SELECT C.nom AS categorie, SUM(P.quantiteStock) AS totalStock
-      FROM produit P
-      JOIN categorie C ON P.categorieId = C.id
-      GROUP BY C.nom
-    `);
-
     await connexion.commit();
 
     const data = {
@@ -50,7 +42,6 @@ const ProduitStockKpi = async (req, res) => {
       FinishedProduct: FinishedProduct[0].FinishedProduct || null,
       TotalProduit: TotalProduit[0].TotalProduit || null,
       LowStockList: LowStockList || [],
-      TotalStockCategorie: TotalStockCategorie || [],
     };
 
     res.status(200).json({ message: "Données chargées", data });

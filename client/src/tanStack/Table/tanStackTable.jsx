@@ -11,7 +11,6 @@ function TanStackTable({
   globalFilter,
   setGlobalFilter,
   columns,
-  quantiteFilter,
 }) {
   const [data, setData] = useState([]);
   useEffect(() => {
@@ -22,9 +21,7 @@ function TanStackTable({
     data,
     state: {
       globalFilter,
-      columnFilters: [{ id: "quantiteStock", value: quantiteFilter || "Tout" }],
     },
-
     columns: columns,
     getCoreRowModel: getCoreRowModel(),
     onGlobalFilterChange: setGlobalFilter,

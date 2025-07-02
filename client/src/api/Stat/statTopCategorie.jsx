@@ -1,10 +1,14 @@
 import React from "react";
-import { api } from "./axiosConfig";
+import { api } from "../axiosConfig";
 
-async function addProduct(newProduct) {
+async function StatTopCategorie(limit) {
   try {
-    const response = await api.post("/produit/new", newProduct);
-    return response.data.message;
+    const response = await api.get(
+      limit !== undefined
+        ? `/stat/top-categorie?limit=${limit}`
+        : `/stat/top-categorie`
+    );
+    return response.data.data;
   } catch (error) {
     const errorMessage = error.response?.data?.errors
       ? error.response.data.errors.map((err) => err.msg).join(", ")
@@ -15,4 +19,4 @@ async function addProduct(newProduct) {
   }
 }
 
-export default addProduct;
+export default StatTopCategorie;

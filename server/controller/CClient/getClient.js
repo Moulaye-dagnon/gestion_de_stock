@@ -2,7 +2,7 @@ const pool = require("../../db");
 const getClient = async (req, res) => {
   try {
     const [row] = await pool.execute(
-      "select nom, telephone, adresse from client"
+      "select id, nom, telephone, adresse from client"
     );
     if (row.length == 0) {
       res.status(404).json({ message: "La table client est vide " });

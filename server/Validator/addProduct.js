@@ -33,6 +33,15 @@ const addProductValidate = [
     ),
   body("prixVente")
     .custom(isValidQantity)
+    .custom((value, { req }) => {
+      const prixAchat = req.body.prixAchat;
+      if (Number(value) < Number(prixAchat)) {
+        throw new Error(
+          "Le prix de vente doit être supérieur ou égal au prix d'achat"
+        );
+      }
+      return true;
+    })
     .withMessage(
       "prix de vente doit être  entiere ou une demi-unité (ex. : 1, 2.5) "
     ),

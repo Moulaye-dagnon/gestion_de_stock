@@ -28,8 +28,8 @@ function AddClientComponent({ setAddClientComponent }) {
 
   return (
     <div className=" absolute overflow-hidden inset-0  bg-black/50 flex justify-center items-center z-40 ">
-      <div className="bg-white rounded-sm h-[50%] w-120 px-7 py-6 flex justify-between flex-col">
-        <div className=" mb-3 font-bold text-xl ">Nouvelle categorie</div>
+      <div className="bg-white rounded-sm h-[60%] w-120 px-7 py-6 flex justify-between flex-col">
+        <div className=" mb-3 font-bold text-xl ">Nouveau Client</div>
         <form
           className=" flex-1 flex flex-col overflow-y-auto"
           onSubmit={handleSubmit}
