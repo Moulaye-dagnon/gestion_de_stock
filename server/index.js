@@ -14,6 +14,7 @@ app.use(
     credentials: true,
   })
 );
+app.options("*", cors());
 
 app.use(coockieParser());
 const port = process.env.PORT || 3000;
