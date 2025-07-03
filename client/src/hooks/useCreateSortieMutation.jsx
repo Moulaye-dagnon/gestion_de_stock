@@ -15,7 +15,7 @@ function useCreateSortieMutation() {
       queryClient.invalidateQueries({ queryKey: ["statVenteKPI"] });
       queryClient.invalidateQueries({ queryKey: ["statTopCategorie"] });
       queryClient.invalidateQueries({ queryKey: ["statCategorie"] });
-      //   queryClient.invalidateQueries({ queryKey: ["statVenteKPI"] });
+      queryClient.invalidateQueries({ queryKey: ["statTopClient"] });
     },
   });
 }

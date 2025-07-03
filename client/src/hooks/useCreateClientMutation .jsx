@@ -8,6 +8,8 @@ function useCreateClientMutation() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["Suppliers"] });
       queryClient.invalidateQueries({ queryKey: ["StatClient"] });
+      queryClient.invalidateQueries({ queryKey: ["statTopClient"] });
+	  
     },
   });
 }

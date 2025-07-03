@@ -13,17 +13,16 @@ const EntreesFournisseursKpi = async (req, res) => {
     `);
 
     // Requête pour SupplierKpi
-    const [TotalSupplierActifs] = await connexion.execute(`
-      SELECT COUNT(DISTINCT F.id) AS TotalSupplierActifs
-      FROM fournisseur F
-      JOIN entrestock E ON F.id = E.fournisseurId
+    const [TotalSupplier] = await connexion.execute(`
+      SELECT COUNT(*) AS TotalSupplier
+      FROM fournisseur 
     `);
 
     await connexion.commit();
 
     const data = {
       TotalEntreStock: TotalEntreStock[0].TotalEntreStock || null,
-      TotalSupplierActifs: TotalSupplierActifs[0].TotalSupplierActifs || null,
+      TotalSupplier: TotalSupplier[0].TotalSupplier || null,
     };
 
     res.status(200).json({ message: "Données chargées", data });
