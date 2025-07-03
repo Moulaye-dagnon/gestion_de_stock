@@ -1,6 +1,6 @@
 import axios from "axios";
 export const api = axios.create({
-  baseURL: "https://mystock-production-2e5a.up.railway.app",
+  baseURL: "https://server-production-dbc8.up.railway.app",
   withCredentials: true,
 });
 
@@ -17,7 +17,7 @@ api.interceptors.response.use(
       originalRequest._retry = true;
       try {
         await axios.post(
-          "https://mystock-production-2e5a.up.railway.app/refresh",
+          "https://server-production-dbc8.up.railway.app/refresh",
           null,
           {
             withCredentials: true,
