@@ -137,14 +137,15 @@ function Sidebar() {
         </div>
       </div>
       <button
+        style={{ color: "black" }}
         onClick={handleLogout}
         disabled={isPending}
-        className=" cursor-pointer flex justify-between items-center"
+        className=" cursor-pointer flex justify-between items-center text-black"
       >
         <span className="w-8">
           <FiLogOut width={"100%"} />
         </span>
-        <span>Deconnexion</span>
+        <span className="text-black">Deconnexion</span>
       </button>
     </div>
   );
