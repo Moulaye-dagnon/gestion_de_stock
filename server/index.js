@@ -16,7 +16,7 @@ app.use(
 );
 
 app.use(coockieParser());
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 4000;
 const authRoute = require("./route/auth");
 const product = require("./route/produit");
 const supplier = require("./route/supplier");
