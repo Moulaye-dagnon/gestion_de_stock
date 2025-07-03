@@ -1,8 +1,8 @@
-const login = require("../controller/login");
-const refresh = require("../controller/refresh");
-const register = require("../controller/register");
-const getMe = require("../controller/getMe");
-const logout = require("../controller/logout");
+const login = require("../controller/Auth/login");
+const refresh = require("../controller/Auth/refresh");
+const register = require("../controller/Auth/register");
+const getMe = require("../controller/Auth/getMe");
+const logout = require("../controller/Auth/logout");
 const authenticate = require("../middlewares/authenticate");
 const {
   addLoginValidator,

@@ -15,6 +15,8 @@ import { OutStock } from "./pages/outStock/OutStock";
 import InStockDetail from "./pages/inStockDetail/InStockDetail";
 import Supplier from "./pages/Suppliers/Supplier";
 import SupplierDetail from "./pages/SupplierDetail/SupplierDetail";
+import Client from "./pages/ClientPage/Client";
+import ClientDetail from "./pages/ClientDetail/ClientDetail";
 
 function App() {
   const root = createBrowserRouter([
@@ -43,6 +45,22 @@ function App() {
           element: (
             <PrivateRoute>
               <ProduitDetail />
+            </PrivateRoute>
+          ),
+        },
+        {
+          path: "/client",
+          element: (
+            <PrivateRoute>
+              <Client />
+            </PrivateRoute>
+          ),
+        },
+        {
+          path: "/client/:clientId/detail",
+          element: (
+            <PrivateRoute>
+              <ClientDetail />
             </PrivateRoute>
           ),
         },

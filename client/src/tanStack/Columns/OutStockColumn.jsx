@@ -7,7 +7,10 @@ const columnSortieStock = [
     cell: (info) => info.getValue(),
     header: () => <span className="flex item-center">Produit</span>,
   }),
-
+  columnHelper.accessor("client", {
+    cell: (info) => info.getValue() || "Pas defini",
+    header: () => <span className="flex item-center">Client</span>,
+  }),
   columnHelper.accessor("quantiteSortie", {
     cell: (info) => info.getValue(),
     header: () => <span className="flex item-center">Quantité Entrée</span>,

@@ -7,13 +7,15 @@ import useForm from "../../hooks/useForm";
 import useCreateProductMutation from "../../hooks/useCreateProductMutation";
 import SpinnerComponent from "../Spinner/SpinnerComponent";
 import { toast, ToastContainer } from "react-toastify";
+import useCategorie from "../../hooks/useCategorie";
 
-function AddProduitComponent({ setAddComponent }) {
+function AddProduitComponent({ setAddCategorie, setAddComponent }) {
   const { isLoading: isLoadingSuppliers, data } = useSuppliers();
+  const { isLoading: isLoadingCategorie, data: dataCategorie } = useCategorie();
   const initialeValue = {
     nom: "",
     fournisseurId: "",
-    categorie: "",
+    categorieId: "",
     prixAchat: "",
     prixVente: "",
     description: "",
@@ -31,13 +33,18 @@ function AddProduitComponent({ setAddComponent }) {
       },
     });
   };
+
+  const handleAddCategorie = () => {
+    setAddCategorie((prev) => !prev);
+  };
   const { inputValue, handleChange, handleSubmit } = useForm(
     initialeValue,
     onSubmit
   );
-  if (isLoadingSuppliers) {
+  if (isLoadingSuppliers || isLoadingCategorie) {
     return <SpinnerComponent />;
   }
+
   return (
     <div className=" absolute overflow-hidden inset-0  bg-black/50 flex justify-center items-center z-30 ">
       <div className="bg-white rounded-sm h-[90%] w-120 px-7 py-6 flex justify-between flex-col">
@@ -86,15 +93,16 @@ function AddProduitComponent({ setAddComponent }) {
               handlechange={handleChange}
               addInput={true}
             />
-            <InputComponent
-              label={"Categorie"}
-              name={"categorie"}
-              type={"text"}
-              value={inputValue.categorie}
-              id={"categorie"}
-              placeholder={"Entrez  la categorie"}
-              handlechange={handleChange}
-              addInput={true}
+            <SelectComponent
+              className={"flex-1 "}
+              items={dataCategorie}
+              value={inputValue.categorieId}
+              title={"Categorie"}
+              handleChange={handleChange}
+              name={"categorieId"}
+              placeholder={"Selectionner une categorie"}
+              productSelect={true}
+              handleAddCategorie={handleAddCategorie}
             />
             <InputComponent
               label={"Prix de vente"}
@@ -108,7 +116,7 @@ function AddProduitComponent({ setAddComponent }) {
             />
 
             <InputComponent
-              label={"Quantité"}
+              label={"Quantité initial"}
               name={"quantite"}
               type={"number"}
               value={inputValue.quantite}
@@ -135,7 +143,16 @@ function AddProduitComponent({ setAddComponent }) {
             />
 
             <ButtonComponent
-              disable={isPending}
+              disable={
+                isPending ||
+                !inputValue.nom ||
+                !inputValue.fournisseurId ||
+                !inputValue.categorieId ||
+                !inputValue.prixAchat ||
+                !inputValue.prixVente ||
+                !inputValue.quantite ||
+                !inputValue.seuilApprovisionnement
+              }
               name={isPending ? "Creation" : "Ajouter"}
             />
           </div>

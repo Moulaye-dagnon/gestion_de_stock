@@ -1,8 +1,8 @@
 const router = require("express").Router();
 const authenticate = require("../middlewares/authenticate");
-const AddEntreStock = require("../controller/addEntreStock");
-const getEntreStocks = require("../controller/getEntreStock");
-const getEntreStocksDetail = require("../controller/EntreStockDetail");
+const AddEntreStock = require("../controller/EntreStock/addEntreStock");
+const getEntreStocks = require("../controller/EntreStock/getEntreStock");
+const getEntreStocksDetail = require("../controller/EntreStock/EntreStockDetail");
 const {
   AddEntreStockValidation,
   validate,

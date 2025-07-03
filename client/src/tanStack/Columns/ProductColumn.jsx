@@ -4,14 +4,17 @@ const columnHelper = createColumnHelper();
 
 const columnsProduct = [
   columnHelper.accessor("nom", {
+    id: "nom",
     cell: (info) => info.getValue(),
     header: () => <span className="flex item-center">Produit</span>,
   }),
   columnHelper.accessor("prixAchat", {
+    id: "prixAchat",
     cell: (info) => info.getValue(),
     header: () => <span className="flex item-center">Prix d'achat</span>,
   }),
   columnHelper.accessor("prixVente", {
+    id: "prixVente",
     cell: (info) => info.getValue(),
     header: () => <span className="flex item-center">Prix de vente</span>,
   }),
@@ -20,9 +23,37 @@ const columnsProduct = [
     header: () => <span className="flex item-center">Categorie</span>,
   }),
   columnHelper.accessor("quantiteStock", {
+    id: "quantiteStock",
     cell: (info) => info.getValue(),
     header: () => <span className="flex item-center">Quantité</span>,
   }),
+  columnHelper.accessor(
+    (row) => {
+      const quantite = parseFloat(row.quantiteStock);
+      const seuil = parseFloat(row.seuilApprovisionnement);
+
+      if (quantite === 0) return "rupture";
+      if (quantite <= seuil) return "stock faible";
+      return "en stock";
+    },
+    {
+      id: "Disponibilité",
+      cell: (info) => {
+        const value = info.getValue();
+        const styles = {
+          rupture: "text-red-600 font-semibold",
+          "stock faible": "text-yellow-600 font-medium",
+          "en stock": "text-green-600",
+        };
+        return (
+          <span className={styles[value]}>
+            {value.charAt(0).toUpperCase() + value.slice(1)}
+          </span>
+        );
+      },
+      header: () => <span className="flex item-center">Disponibilité</span>,
+    }
+  ),
 ];
 
 export default columnsProduct;

@@ -28,7 +28,7 @@ function AddSupplierComponent({ setAddSupplierComponent }) {
 
   return (
     <div className=" absolute overflow-hidden inset-0  bg-black/50 flex justify-center items-center z-30 ">
-      <div className="bg-white rounded-sm h-[80%] w-120 px-7 py-6 flex justify-between flex-col">
+      <div className="bg-white rounded-sm h-[70%] w-120 px-7 py-6 flex justify-between flex-col">
         <div className=" mb-3 font-bold text-xl ">Nouveau fournisseur</div>
         <form
           className=" flex-1 flex flex-col overflow-y-auto"

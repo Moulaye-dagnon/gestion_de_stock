@@ -2,9 +2,9 @@ import { NavLink } from "react-router-dom";
 
 import Home from "../../assets/Home.svg";
 import inventaire from "../../assets/inventaire.svg";
+import suppliers from "../../assets/suppliers.svg";
 import store from "../../assets/store.svg";
-
-import React from "react";
+import order from "../../assets/order.svg";
 import { AiOutlineStock } from "react-icons/ai";
 import { FiLogOut } from "react-icons/fi";
 import { UseAuthContext } from "../../Context/AuthContext";
@@ -27,56 +27,38 @@ function Sidebar() {
           </span>
           <span className=" inline-block mx-1">My_Stock</span>
         </div>
-        <div className=" w-full px-4 mt-6">
+        <div className=" w-full px-2 mt-6">
           <ul className=" w-full">
             <li className=" my-4 w-full">
               <NavLink
                 to={"/"}
                 className={({ isActive }) =>
-                  `flex items-center w-full  gap-2.5 py-2 px-1 rounded-md transition-all ${
+                  `flex items-center w-full  gap-2.5 py-2 pl-1 rounded-md transition-all ${
                     isActive
                       ? "bg-gray-200 shadow-lg text-my-primary"
                       : "bg-white"
                   } hover:bg-gray-100 hover:shadow-lg text-my-sub-hanging`
                 }
               >
-                <span className="w-5">
-                  <img src={Home} alt="" srcset="" />
+                <span className="flex-none w-5">
+                  <img src={store} alt="" srcset="" />
                 </span>
                 <span>Board</span>
               </NavLink>
             </li>
             <li className=" my-4 w-full">
               <NavLink
-                to={"/inventaire"}
-                className={({ isActive }) =>
-                  `flex items-center w-full  gap-2.5 py-2 px-1 rounded-md transition-all ${
-                    isActive
-                      ? "bg-gray-200 shadow-lg text-my-primary"
-                      : "bg-white"
-                  } hover:bg-gray-100 hover:shadow-lg text-my-sub-hanging`
-                }
-              >
-                <span className="w-5 ">
-                  <img src={inventaire} alt="" srcset="" />
-                </span>
-                <span>Inventaire</span>
-              </NavLink>
-            </li>
-
-            <li className=" my-4 w-full">
-              <NavLink
                 to={"/stock/entre"}
                 className={({ isActive }) =>
-                  `flex items-center w-full  gap-2.5 py-2 px-1 rounded-md transition-all ${
+                  `flex items-center w-full  gap-2.5 py-2 pl-1 rounded-md transition-all ${
                     isActive
                       ? "bg-gray-200 shadow-lg text-my-primary"
                       : "bg-white"
                   } hover:bg-gray-100 hover:shadow-lg text-my-sub-hanging`
                 }
               >
-                <span className="w-5 ">
-                  <img src={inventaire} alt="" srcset="" />
+                <span className="flex-none w-5 ">
+                  <img src={order} alt="" srcset="" />
                 </span>
                 <span>Entrée </span>
               </NavLink>
@@ -85,34 +67,70 @@ function Sidebar() {
               <NavLink
                 to={"/stock/sortie"}
                 className={({ isActive }) =>
-                  `flex items-center w-full  gap-2.5 py-2 px-1 rounded-md transition-all ${
+                  `flex items-center w-full  gap-2.5 py-2 pl-1  rounded-md transition-all ${
                     isActive
                       ? "bg-gray-200 shadow-lg text-my-primary"
                       : "bg-white"
                   } hover:bg-gray-100 hover:shadow-lg text-my-sub-hanging`
                 }
               >
-                <span className="w-5 ">
-                  <img src={inventaire} alt="" srcset="" />
+                <span className="flex-none w-5 ">
+                  <img src={order} alt="" srcset="" />
                 </span>
                 <span>Sortie</span>
               </NavLink>
             </li>
             <li className=" my-4 w-full">
               <NavLink
-                to={"/fournisseur"}
+                to={"/inventaire"}
                 className={({ isActive }) =>
-                  `flex items-center w-full  gap-2.5 py-2 px-1 rounded-md transition-all ${
+                  `flex items-center w-full  gap-2.5 py-2 pl-1 rounded-md transition-all ${
                     isActive
                       ? "bg-gray-200 shadow-lg text-my-primary"
                       : "bg-white"
                   } hover:bg-gray-100 hover:shadow-lg text-my-sub-hanging`
                 }
               >
-                <span className="w-5 ">
-                  <img src={store} alt="" srcset="" />
+                <span className="flex-none w-5 ">
+                  <img src={inventaire} alt="" srcset="" />
                 </span>
-                <span>Fournisseur</span>
+                <span>Inventaire</span>
+              </NavLink>
+            </li>
+
+            <li className=" my-4 w-full">
+              <NavLink
+                to={"/client"}
+                className={({ isActive }) =>
+                  `flex items-center w-full  gap-2.5 py-2 pl-1 rounded-md transition-all ${
+                    isActive
+                      ? "bg-gray-200 shadow-lg text-my-primary"
+                      : "bg-white"
+                  } hover:bg-gray-100 hover:shadow-lg text-my-sub-hanging`
+                }
+              >
+                <span className="flex-none w-5 ">
+                  <img src={suppliers} alt="" srcset="" />
+                </span>
+                <span>Clients</span>
+              </NavLink>
+            </li>
+
+            <li className=" my-4 w-full">
+              <NavLink
+                to={"/fournisseur"}
+                className={({ isActive }) =>
+                  `flex items-center w-full  gap-2.5 py-2 pl-1 rounded-md transition-all ${
+                    isActive
+                      ? "bg-gray-200 shadow-lg text-my-primary"
+                      : "bg-white"
+                  } hover:bg-gray-100 hover:shadow-lg text-my-sub-hanging`
+                }
+              >
+                <span className="flex-none w-5 ">
+                  <img src={suppliers} alt="" srcset="" />
+                </span>
+                <span>Fournisseurs</span>
               </NavLink>
             </li>
           </ul>

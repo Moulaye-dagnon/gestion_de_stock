@@ -3,7 +3,6 @@ const pool = require("../db");
 const isValidQantity = require("../utils/isValidQantity");
 const addProductValidate = [
   body("nom")
-    .optional()
     .isString()
     .trim()
     .notEmpty()
@@ -20,37 +19,39 @@ const addProductValidate = [
     }),
   ,
   body("fournisseurId")
-    .optional()
     .isInt({ min: 1 })
     .toInt()
-    .withMessage("fourisseurId doit etre un entier positif"),
-  body("categorie")
-    .optional()
-    .isString()
-    .trim()
-    .notEmpty()
-    .withMessage("categorie doit être une chaîne non vide"),
+    .withMessage("fourisseur doit etre bien fournie"),
+  body("categorieId")
+    .isInt({ min: 1 })
+    .toInt()
+    .withMessage("categorie  doit etre bien fournie"),
   body("prixAchat")
-    .optional()
     .custom(isValidQantity)
     .withMessage(
-      "prixAchat doit être  entiere ou une demi-unité (ex. : 1, 2.5) "
+      "prix d'achat doit être  entiere ou une demi-unité (ex. : 1, 2.5) "
     ),
   body("prixVente")
-    .optional()
     .custom(isValidQantity)
+    .custom((value, { req }) => {
+      const prixAchat = req.body.prixAchat;
+      if (Number(value) < Number(prixAchat)) {
+        throw new Error(
+          "Le prix de vente doit être supérieur ou égal au prix d'achat"
+        );
+      }
+      return true;
+    })
     .withMessage(
-      "prixVente doit être  entiere ou une demi-unité (ex. : 1, 2.5) "
+      "prix de vente doit être  entiere ou une demi-unité (ex. : 1, 2.5) "
     ),
   body("description")
-    .optional()
     .isString()
     .trim()
     .notEmpty()
     .withMessage("description doit être une chaîne non vide"),
   body("quantite").custom(isValidQantity),
   body("seuilApprovisionnement")
-    .optional()
     .custom(isValidQantity)
     .withMessage(
       "seuilApprovisionnement doit être entier ou une demi-unité (ex. : 1, 2.5)"

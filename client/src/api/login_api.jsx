@@ -8,6 +8,8 @@ export const login_api = async (inputValue) => {
     });
     return response.data.message;
   } catch (error) {
+    console.log(error);
+
     const errorMessage = error.response?.data?.errors
       ? error.response.data.errors.map((err) => err.msg).join(", ")
       : error.response?.data?.message
