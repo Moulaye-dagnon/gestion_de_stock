@@ -3,7 +3,7 @@ import statEntreFournisseurKPI from "../../api/Stat/statEntreFournisseurKPI";
 
 function useStatSortieStock() {
   const { isLoading, isError, error, data } = useQuery({
-    queryKey: ["statSortieStock"],
+    queryKey: ["EntreFournisseur"],
     queryFn: statEntreFournisseurKPI,
   });
   return { isLoading, isError, error, data };

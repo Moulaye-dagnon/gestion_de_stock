@@ -8,7 +8,10 @@ function useCreateProductMutation() {
     mutationFn: addProduct,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["Produits"] });
-      queryClient.invalidateQueries({ queryKey: ["StatProduit"] });
+      queryClient.invalidateQueries({ queryKey: ["statProduitStockKPI"] });
+      queryClient.invalidateQueries({ queryKey: ["statCategorie"] });
+      queryClient.invalidateQueries({ queryKey: ["statTopCategorie"] });
+      queryClient.invalidateQueries({ queryKey: ["statVenteKPI"] });
     },
   });
 }

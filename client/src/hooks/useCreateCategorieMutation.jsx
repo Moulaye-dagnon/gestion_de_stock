@@ -7,6 +7,8 @@ function useCreateCategorieMutation() {
     mutationFn: addCategorieApi,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["categorieProduct"] });
+      queryClient.invalidateQueries({ queryKey: ["statCategorie"] });
+      queryClient.invalidateQueries({ queryKey: ["statProduitStockKPI"] });
     },
   });
 }

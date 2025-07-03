@@ -12,7 +12,10 @@ function useCreateSortieMutation() {
       queryClient.invalidateQueries({
         queryKey: ["Produit", newSortieStock.produitId],
       });
-      queryClient.invalidateQueries({ queryKey: ["StatProduit"] });
+      queryClient.invalidateQueries({ queryKey: ["statVenteKPI"] });
+      queryClient.invalidateQueries({ queryKey: ["statTopCategorie"] });
+      queryClient.invalidateQueries({ queryKey: ["statCategorie"] });
+      //   queryClient.invalidateQueries({ queryKey: ["statVenteKPI"] });
     },
   });
 }

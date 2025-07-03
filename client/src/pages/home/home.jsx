@@ -15,10 +15,12 @@ import useStatSortieStock from "../../hooks/Stat/useStatEntreFournisseur";
 import useStatCategorie from "../../hooks/Stat/useStatCategorie";
 import useStatTopCategorie from "../../hooks/Stat/useStatTopCategorie";
 import CategorieList from "../../components/Card/CategorieList";
+import LowStockAllComponent from "../../components/LowStock/LowStockAllComponent";
 
 export function Home() {
   const navigate = useNavigate();
   const [OverallTopCaegorie, setOverallTopCategorie] = useState(false);
+  const [OverallLowStock, setOverallLowStock] = useState(false);
   const { user, isloading } = UseAuthContext();
   useEffect(() => {
     if ((!isloading && !user) || !user) {
@@ -101,12 +103,18 @@ export function Home() {
 
           <div className="grid grid-cols-[1fr_300px] gap-2">
             <TopSellTable data={StatVenteData?.TopSeller} />
-            <LowStockComponent data={StatProduitStockData?.LowStockList} />
+            <LowStockComponent
+              handleOnclick={() => setOverallLowStock(true)}
+              data={StatProduitStockData?.LowStockList}
+            />
           </div>
         </div>
       </div>
       {OverallTopCaegorie && (
         <CategorieList setOverallTopCategorie={setOverallTopCategorie} />
+      )}
+      {OverallLowStock && (
+        <LowStockAllComponent setOverallLowStock={setOverallLowStock} />
       )}
     </>
   );

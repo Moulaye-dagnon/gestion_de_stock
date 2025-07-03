@@ -12,7 +12,6 @@ import { IoIosArrowRoundForward } from "react-icons/io";
 import AddProduitComponent from "../../components/addProduit/AddProduitComponent";
 import SpinnerComponent from "../../components/Spinner/SpinnerComponent";
 import columnsProduct from "../../tanStack/Columns/ProductColumn";
-import getDisponibiliteLabel from "../../utils/DisponibiliteLabel";
 import AddCategorieComponent from "../../components/addCategorie/AddCategorieComponent";
 
 export function Inventaire() {
@@ -72,9 +71,7 @@ export function Inventaire() {
                           )}
                         </th>
                       ))}
-                      <th className="px-4 py-2 text-left text-xs font-medium text-black uppercase tracking-wide">
-                        Disponibilité
-                      </th>
+
                       <th className="px-4 py-2 text-left text-xs font-medium text-black uppercase tracking-wide">
                         Details
                       </th>
@@ -95,13 +92,6 @@ export function Inventaire() {
                           )}
                         </td>
                       ))}
-
-                      <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-500">
-                        {getDisponibiliteLabel(
-                          row.original.quantiteStock,
-                          row.original.seuilApprovisionnement
-                        )}
-                      </td>
 
                       <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-500">
                         <NavLink

@@ -7,6 +7,7 @@ function useCreateClientMutation() {
     mutationFn: addClientApi,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["Suppliers"] });
+      queryClient.invalidateQueries({ queryKey: ["StatClient"] });
     },
   });
 }
