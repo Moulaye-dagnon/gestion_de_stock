@@ -36,12 +36,17 @@ const VentesKpi = async (req, res) => {
 
     // Requête pour TopSeller
     const [TopSeller] = await connexion.execute(`
-      SELECT P.nom, SUM(S.quantiteSortie) AS Total_quantite_vendu, P.quantiteStock AS Total_quantite_stock, P.prixAchat AS Prix
-      FROM produit P
-      JOIN sortiestock S ON S.produitId = P.id
-      GROUP BY P.nom
-      ORDER BY Total_quantite_vendu DESC
-      LIMIT 3
+     SELECT 
+  P.nom, 
+  SUM(S.quantiteSortie) AS Total_quantite_vendu, 
+  MAX(P.quantiteStock) AS Total_quantite_stock, 
+  MAX(P.prixAchat) AS Prix
+ FROM produit P
+ JOIN sortiestock S ON S.produitId = P.id
+ GROUP BY P.nom
+ ORDER BY Total_quantite_vendu DESC
+  LIMIT 3
+
     `);
 
     // Requête pour TopCategorie

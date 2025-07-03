@@ -9,7 +9,7 @@ const StatEntrefournisseurKPI = require("../controller/Stat/EntreFournisseurKPI"
 const TopCategorieKpi = require("../controller/Stat/TopCategorie");
 const LowStockKPI = require("../controller/Stat/LowStock");
 router.get("/stat/produit-stock", authenticate, StatProduitStockKPI);
-router.get("/stat/vente-kpi", authenticate, StatVenteKPI);
+router.get("/stat/vente-kpi", StatVenteKPI);
 router.get("/stat/entre-fournisseur", authenticate, StatEntrefournisseurKPI);
 router.get("/stat/categorie", authenticate, StatCategorie);
 router.get("/stat/client", authenticate, StatCClient);
