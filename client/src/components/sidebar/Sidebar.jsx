@@ -29,7 +29,7 @@ function Sidebar() {
         </div>
         <div className=" w-full px-2 mt-6">
           <ul className=" w-full">
-            <li className=" my-2  md:my-4 w-full">
+            <li className=" my-2  lg:my-4 w-full">
               <NavLink
                 to={"/"}
                 className={({ isActive }) =>
@@ -46,7 +46,7 @@ function Sidebar() {
                 <span>Board</span>
               </NavLink>
             </li>
-            <li className=" my-2  md:my-4 w-full">
+            <li className=" my-2  lg:my-4 w-full">
               <NavLink
                 to={"/stock/entre"}
                 className={({ isActive }) =>
@@ -63,7 +63,7 @@ function Sidebar() {
                 <span>Entrée </span>
               </NavLink>
             </li>
-            <li className=" my-2  md:my-4 w-full">
+            <li className=" my-2  lg:my-4 w-full">
               <NavLink
                 to={"/stock/sortie"}
                 className={({ isActive }) =>
@@ -80,7 +80,7 @@ function Sidebar() {
                 <span>Sortie</span>
               </NavLink>
             </li>
-            <li className=" my-2  md:my-4 w-full">
+            <li className=" my-2  lg:my-4 w-full">
               <NavLink
                 to={"/inventaire"}
                 className={({ isActive }) =>
@@ -98,7 +98,7 @@ function Sidebar() {
               </NavLink>
             </li>
 
-            <li className=" my-2  md:my-4 w-full">
+            <li className=" my-2  lg:my-4 w-full">
               <NavLink
                 to={"/client"}
                 className={({ isActive }) =>
@@ -116,7 +116,7 @@ function Sidebar() {
               </NavLink>
             </li>
 
-            <li className=" my-2  md:my-4 w-full">
+            <li className=" my-2  lg:my-4 w-full">
               <NavLink
                 to={"/fournisseur"}
                 className={({ isActive }) =>
