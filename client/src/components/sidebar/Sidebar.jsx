@@ -139,7 +139,7 @@ function Sidebar() {
       <button
         onClick={handleLogout}
         disabled={isPending}
-        className=" flex justify-between items-center"
+        className=" cursor-pointer flex justify-between items-center"
       >
         <span className="w-8">
           <FiLogOut width={"100%"} />

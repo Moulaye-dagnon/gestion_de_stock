@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import OverallComponent from "../../components/Overrall/OverallComponent";
 import { UseAuthContext } from "../../Context/AuthContext";
 import { useNavigate } from "react-router";
 import Card from "../../components/Card/Card";
