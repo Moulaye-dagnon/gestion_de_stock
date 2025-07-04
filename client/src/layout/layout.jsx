@@ -6,7 +6,7 @@ import { ToastContainer } from "react-toastify";
 
 export function Layout() {
   const [isSideOpen, setIsSideOpen] = useState(false);
-  const [globalFilter, setGlobalFilter] = useState([]);
+  const [globalFilter, setGlobalFilter] = useState("");
 
   const handleToggleSidebar = () => setIsSideOpen(!isSideOpen);
 

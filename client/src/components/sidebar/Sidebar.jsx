@@ -1,6 +1,5 @@
 import { NavLink } from "react-router-dom";
 
-import Home from "../../assets/Home.svg";
 import inventaire from "../../assets/inventaire.svg";
 import suppliers from "../../assets/suppliers.svg";
 import store from "../../assets/store.svg";
@@ -9,6 +8,7 @@ import { AiOutlineStock } from "react-icons/ai";
 import { FiLogOut } from "react-icons/fi";
 import { UseAuthContext } from "../../Context/AuthContext";
 import useLogoutMutation from "../../hooks/useLogoutMutation";
+import { TfiShoppingCart } from "react-icons/tfi";
 
 function Sidebar() {
   const { setUser } = UseAuthContext();
@@ -58,7 +58,7 @@ function Sidebar() {
                 }
               >
                 <span className="flex-none w-5 ">
-                  <img src={order} alt="" srcset="" />
+                  <TfiShoppingCart size={"100%"} />
                 </span>
                 <span>Entrée </span>
               </NavLink>

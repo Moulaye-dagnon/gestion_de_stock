@@ -1,35 +1,41 @@
 import { useEffect, useState } from "react";
-import { UseAuthContext } from "../../Context/AuthContext";
 import { useNavigate } from "react-router";
-import Card from "../../components/Card/Card";
-import CardProduit from "../../components/Card/CardProduit";
-import TopSellTable from "../../components/TopSellTable/TopSellTable";
-import LowStockComponent from "../../components/LowStock/LowStockComponent";
-import SpinnerComponent from "../../components/Spinner/SpinnerComponent";
+import { UseAuthContext } from "../../Context/AuthContext";
+
 import { formatPrice } from "../../utils/FormatPrice";
-import CardTopCategorieComponent from "../../components/Card/CardTopCategorieComponent";
 import useStatVente from "../../hooks/Stat/useStatVente";
 import useStatProduitStockKPI from "../../hooks/Stat/useStatProduitStockKPI";
 import useStatSortieStock from "../../hooks/Stat/useStatEntreFournisseur";
 import useStatCategorie from "../../hooks/Stat/useStatCategorie";
 import useStatTopCategorie from "../../hooks/Stat/useStatTopCategorie";
-import CategorieList from "../../components/Card/CategorieList";
-import LowStockAllComponent from "../../components/LowStock/LowStockAllComponent";
-import CartTopClient from "../../components/Card/CartTopClient";
 import useStatTopClient from "../../hooks/Stat/useStatTopClient";
+import useStatTopProduitSell from "../../hooks/Stat/useStatTopProduitSell";
+
+import SpinnerComponent from "../../components/Spinner/SpinnerComponent";
+import Card from "../../components/Card/Card";
+import CardTopCategorieComponent from "../../components/Card/CardTopCategorieComponent";
 import CardTopClientList from "../../components/Card/CardTopClientList";
+import TopSellTable from "../../components/TopSellTable/TopSellTable";
+import TopProduitSellAll from "../../components/TopSellTable/TopProduitSellAll";
+import LowStockComponent from "../../components/LowStock/LowStockComponent";
+import LowStockAllComponent from "../../components/LowStock/LowStockAllComponent";
+import CategorieList from "../../components/Card/CategorieList";
+import CartTopClient from "../../components/Card/CartTopClient";
 
 export function Home() {
   const navigate = useNavigate();
-  const [OverallTopCaegorie, setOverallTopCategorie] = useState(false);
-  const [OverallLowStock, setOverallLowStock] = useState(false);
-  const [OverallTopClient, setOverallTopClient] = useState(false);
   const { user, isloading } = UseAuthContext();
+
   useEffect(() => {
     if ((!isloading && !user) || !user) {
       navigate("/login");
     }
   }, [user, isloading, navigate]);
+
+  const [OverallTopCategorie, setOverallTopCategorie] = useState(false);
+  const [OverallLowStock, setOverallLowStock] = useState(false);
+  const [OverallTopClient, setOverallTopClient] = useState(false);
+  const [OverallTopProduitSell, setOverallTopProduitSell] = useState(false);
 
   const { isLoading: isLoadingStatProduitStock, data: StatProduitStockData } =
     useStatProduitStockKPI();
@@ -46,27 +52,41 @@ export function Home() {
     isLoading: isLoadingStatEntrerFournisseur,
     data: statEntreFournisseur,
   } = useStatSortieStock();
+
   const { isLoading: isLoadingStatCategorie, data: StatCategorieData } =
     useStatCategorie();
+
   const { isLoading: isLoadingStatTopClient, data: StatTopClientData } =
     useStatTopClient({ limit: 3 });
+
   const { isLoading: isLoadingStatTopClientAll, data: StatTopClientDataall } =
     useStatTopClient();
-  if (
+
+  const { isLoading: isLoadingStatTopProduitSell, data: StatTopProduitSell } =
+    useStatTopProduitSell({ limit: 3 });
+
+  const {
+    isLoading: isLoadingStatTopProduitSellAll,
+    data: StatTopProduitSellAll,
+  } = useStatTopProduitSell();
+
+  const isLoading =
     isLoadingStatProduitStock ||
     isLoadingStatEntrerFournisseur ||
     isLoadingStatVente ||
     isLoadingStatCategorie ||
     isLoadingStatTopCategorie ||
+    isLoadingStatTopCategorieAll ||
     isLoadingStatTopClient ||
     isLoadingStatTopClientAll ||
-    isLoadingStatTopCategorieAll
-  )
-    return <SpinnerComponent />;
+    isLoadingStatTopProduitSell ||
+    isLoadingStatTopProduitSellAll;
+
+  if (isLoading) return <SpinnerComponent />;
 
   return (
     <>
-      <div className="flex-1  pb-6 flex flex-col gap-y-2 overflow-auto   w-full">
+      <div className="flex-1 pb-6 flex flex-col gap-y-2 overflow-auto w-full">
         <div className="flex flex-col gap-y-2">
           <Card
             title={"Aperçu Stock"}
@@ -85,6 +105,7 @@ export function Home() {
             color4={"bg-red-100"}
             total={4}
           />
+
           <Card
             title={"Statistique des ventes"}
             name1={"Chiffre d'affaire"}
@@ -99,6 +120,7 @@ export function Home() {
             onclick4={() => navigate("/client")}
             total={4}
           />
+
           <div className="grid grid-cols-1 md:grid-cols-[1fr_1fr] gap-2">
             <Card
               title={"Résumé des produits"}
@@ -115,12 +137,16 @@ export function Home() {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-2">
-            <TopSellTable data={StatVenteData?.TopSeller} />
+            <TopSellTable
+              handleOnclick={() => setOverallTopProduitSell(true)}
+              data={StatTopProduitSell?.TopProduitSell}
+            />
             <LowStockComponent
               handleOnclick={() => setOverallLowStock(true)}
               data={StatProduitStockData?.LowStockList}
             />
           </div>
+
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-2">
             <CartTopClient
               data={StatTopClientData?.TopClient}
@@ -129,7 +155,8 @@ export function Home() {
           </div>
         </div>
       </div>
-      {OverallTopCaegorie && (
+
+      {OverallTopCategorie && (
         <CategorieList
           data={StatCategorieTopCategorieDataAll?.TopCategorie}
           setOverallTopCategorie={setOverallTopCategorie}
@@ -142,6 +169,12 @@ export function Home() {
         <CardTopClientList
           setOverallTopClient={setOverallTopClient}
           data={StatTopClientDataall?.TopClient}
+        />
+      )}
+      {OverallTopProduitSell && (
+        <TopProduitSellAll
+          data={StatTopProduitSellAll?.TopProduitSell}
+          setOverallTopProduitSell={setOverallTopProduitSell}
         />
       )}
     </>

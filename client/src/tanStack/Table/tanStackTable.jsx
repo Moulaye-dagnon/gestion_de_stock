@@ -6,12 +6,7 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 
-function TanStackTable({
-  Data,
-  globalFilter,
-  setGlobalFilter,
-  columns,
-}) {
+function TanStackTable({ Data, globalFilter, setGlobalFilter, columns }) {
   const [data, setData] = useState([]);
   useEffect(() => {
     if (Data) setData(Data);

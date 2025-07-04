@@ -32,9 +32,15 @@ const columnsProduct = [
       const quantite = parseFloat(row.quantiteStock);
       const seuil = parseFloat(row.seuilApprovisionnement);
 
-      if (quantite === 0) return "rupture";
-      if (quantite <= seuil) return "stock faible";
-      return "en stock";
+      const dispo =
+        quantite === 0
+          ? "rupture"
+          : quantite <= seuil
+          ? "stock faible"
+          : "en stock";
+
+      row.disponibilite = dispo;
+      return dispo;
     },
     {
       id: "Disponibilité",
