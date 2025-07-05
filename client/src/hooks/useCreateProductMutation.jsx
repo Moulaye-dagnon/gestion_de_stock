@@ -9,9 +9,10 @@ function useCreateProductMutation() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["Produits"] });
       queryClient.invalidateQueries({ queryKey: ["statProduitStockKPI"] });
-      queryClient.invalidateQueries({ queryKey: ["statCategorie"] });
       queryClient.invalidateQueries({ queryKey: ["statTopCategorie"] });
-      queryClient.invalidateQueries({ queryKey: ["statVenteKPI"] });
+      queryClient.invalidateQueries({ queryKey: ["StatTopProduitSell"] });
+      queryClient.invalidateQueries({ queryKey: ["EntreFournisseur"] });
+      queryClient.invalidateQueries({ queryKey: ["statLowStock"] });
     },
   });
 }

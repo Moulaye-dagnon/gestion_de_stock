@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 
 function useClientDetail({ clientId }) {
   const { isLoading, isError, error, data } = useQuery({
-    queryKey: ["clientDetail", clientId],
+    queryKey: ["client", clientId],
     queryFn: () => ClientDetail(clientId),
   });
   return { isLoading, isError, error, data };

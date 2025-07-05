@@ -1,20 +1,20 @@
 const pool = require("../../db");
 
-const TopClient = async (req, res) => {
+const TopSuppliers = async (req, res) => {
   const { limit } = req.query;
   let connexion;
   try {
     connexion = await pool.getConnection();
     await connexion.beginTransaction();
     const sql = `SELECT C.nom , SUM(S.quantiteSortie * P.prixVente) AS Total_Achat   FROM client C JOIN sortiestock S ON C.id = S.clientId JOIN produit P ON S.produitId = P.id GROUP BY C.nom ORDER BY Total_Achat DESC`;
-    const [TopClient] = limit
+    const [TopSuppliers] = limit
       ? await connexion.execute(`${sql} LIMIT ?`, [limit])
       : await connexion.execute(sql);
 
     await connexion.commit();
 
     const data = {
-      TopClient: TopClient || [],
+      TopSuppliers: TopSuppliers || [],
     };
 
     res.status(200).json({ message: "Données chargées", data });
@@ -34,4 +34,4 @@ const TopClient = async (req, res) => {
   }
 };
 
-module.exports = TopClient;
+module.exports = TopSuppliers;

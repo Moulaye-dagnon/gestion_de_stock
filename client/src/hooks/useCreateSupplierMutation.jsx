@@ -7,8 +7,10 @@ function useCreateSupplierMutation() {
     mutationFn: addSupplier,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["Suppliers"] });
+
+      queryClient.invalidateQueries({ queryKey: ["statProduitStockKPI"] });
       queryClient.invalidateQueries({ queryKey: ["EntreFournisseur"] });
-      queryClient.invalidateQueries({ queryKey: ["Suppliers"] });
+      queryClient.invalidateQueries({ queryKey: ["statLowStock"] });
     },
   });
 }
