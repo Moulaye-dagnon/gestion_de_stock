@@ -116,11 +116,7 @@ function App() {
     },
     {
       path: "/register",
-      element: (
-        <PrivateRoute>
-          <Register />
-        </PrivateRoute>
-      ),
+      element: <Register />,
     },
     {
       path: "/login",
