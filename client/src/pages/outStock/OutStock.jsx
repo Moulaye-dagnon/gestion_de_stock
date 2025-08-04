@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import { UseAuthContext } from "../../Context/AuthContext";
-import { NavLink, useNavigate, useOutletContext } from "react-router";
+import { NavLink, useOutletContext } from "react-router";
 import TanStackTable from "../../tanStack/Table/tanStackTable";
 import { flexRender } from "@tanstack/react-table";
 import ButtonComponent from "../../components/buttonComponent/ButtonComponent";
@@ -13,16 +13,16 @@ import columnSortieStock from "../../tanStack/Columns/OutStockColumn";
 import AddSortieStockComponent from "../../components/addSortie/AddSortieStockComponent";
 
 export function OutStock() {
-  const navigate = useNavigate();
-  const { user, isloading } = UseAuthContext();
+  // const navigate = useNavigate();
+  const { user } = UseAuthContext();
   const [AddSortieComponent, setAddSortieComponent] = useState(false);
   const handleHideAddSortieComponent = () => setAddSortieComponent((c) => !c);
 
-  useEffect(() => {
-    if (!isloading && !user) {
-      navigate("/login");
-    }
-  }, [user, isloading, navigate]);
+  //   useEffect(() => {
+  //     if (!isloading && !user) {
+  //       navigate("/login");
+  //     }
+  //   }, [user, isloading, navigate]);
   const { isLoading, isError, error, data } = useOutStock();
   const propsOutlet = useOutletContext();
   const table = TanStackTable({

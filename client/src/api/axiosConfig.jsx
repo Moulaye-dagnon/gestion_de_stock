@@ -1,6 +1,6 @@
 import axios from "axios";
 export const api = axios.create({
-  baseURL: "http://localhost:3000",
+  baseURL: "https://back-odetta-moulaye-d-1bbca60b.koyeb.app",
   withCredentials: true,
 });
 
@@ -16,9 +16,13 @@ api.interceptors.response.use(
     if (error.response?.status == 401 && !originalRequest._retry) {
       originalRequest._retry = true;
       try {
-        await axios.post("http://localhost:3000/refresh", null, {
-          withCredentials: true,
-        });
+        await axios.post(
+          "https://back-odetta-moulaye-d-1bbca60b.koyeb.app/refresh",
+          null,
+          {
+            withCredentials: true,
+          }
+        );
         return api(originalRequest);
       } catch (refreshError) {
         onSetUser(null);
