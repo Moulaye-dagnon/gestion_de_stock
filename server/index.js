@@ -9,7 +9,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:5173",
-      "https://mystock-production-2e5a.up.railway.app",
+      "https://gestion-de-stock-ten.vercel.app",
     ],
     credentials: true,
   })
