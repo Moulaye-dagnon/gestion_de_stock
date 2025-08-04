@@ -31,6 +31,7 @@ const refresh = async (req, res) => {
     res.cookie("access_token", access_token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
+      sameSite: "None",
       maxAge: 60 * 60 * 1000,
     });
     res.status(200).json({ message: "Rafraichissement reussie" });
