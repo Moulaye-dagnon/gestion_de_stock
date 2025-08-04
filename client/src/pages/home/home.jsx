@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { UseAuthContext } from "../../Context/AuthContext";
 
@@ -24,13 +24,13 @@ import CartTopClient from "../../components/Card/CartTopClient";
 
 export function Home() {
   const navigate = useNavigate();
-  //const { user, isloading } = UseAuthContext();
+  const { user, isloading } = UseAuthContext();
 
-  //   useEffect(() => {
-  //     if ((!isloading && !user) || !user) {
-  //       navigate("/login");
-  //     }
-  //   }, [user, isloading, navigate]);
+  useEffect(() => {
+    if ((!isloading && !user) || !user) {
+      navigate("/login");
+    }
+  }, [user, isloading, navigate]);
 
   const [OverallTopCategorie, setOverallTopCategorie] = useState(false);
   const [OverallLowStock, setOverallLowStock] = useState(false);

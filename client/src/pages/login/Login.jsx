@@ -6,6 +6,7 @@ import useForm from "../../hooks/useForm";
 import { UseAuthContext } from "../../Context/AuthContext";
 import { toast, ToastContainer } from "react-toastify";
 import useLoginMutation from "../../hooks/useLoginMutation";
+import { NavLink } from "react-router";
 
 export function Login() {
   const { setUser } = UseAuthContext();
@@ -66,7 +67,12 @@ export function Login() {
             />
           </div>
         </form>
-
+        <small className="mt-2">
+          Vous n'avez pas de compte?
+          <NavLink className=" underline text-blue-400" to={"/register"}>
+            S'inscrire
+          </NavLink>
+        </small>
         <ToastContainer />
       </AuthLayout>
       <ToastContainer />

@@ -1,6 +1,6 @@
-import {  useState } from "react";
+import { useEffect, useState } from "react";
 import { UseAuthContext } from "../../Context/AuthContext";
-import { NavLink, useOutletContext } from "react-router";
+import { NavLink, useNavigate, useOutletContext } from "react-router";
 import TanStackTable from "../../tanStack/Table/tanStackTable";
 import { flexRender } from "@tanstack/react-table";
 import ButtonComponent from "../../components/buttonComponent/ButtonComponent";
@@ -13,15 +13,16 @@ import columnsEntreStock from "../../tanStack/Columns/EntreStockColumn";
 import AddEntreStockComponent from "../../components/addEntre/AddEntreStockComponent";
 
 export function InStock() {
-  const { user } = UseAuthContext();
+  const navigate = useNavigate();
+  const { user, isloading } = UseAuthContext();
   const [hideAddComponet, setAddEntreComponent] = useState(false);
   const handleHideAddEntreComponent = () => setAddEntreComponent((c) => !c);
 
-//   useEffect(() => {
-//     if (!isloading && !user) {
-//       navigate("/login");
-//     }
-//   }, [user, isloading, navigate]);
+  useEffect(() => {
+    if (!isloading && !user) {
+      navigate("/login");
+    }
+  }, [user, isloading, navigate]);
   const { isLoading, isError, error, data } = useInStock();
   const propsOutlet = useOutletContext();
   const table = TanStackTable({

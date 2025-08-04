@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { NavLink, useOutletContext } from "react-router";
+import React, { useEffect, useState } from "react";
+import { NavLink, useNavigate, useOutletContext } from "react-router";
 import { UseAuthContext } from "../../Context/AuthContext";
 import useSuppliers from "../../hooks/useSuppliers";
 import TanStackTable from "../../tanStack/Table/tanStackTable";
@@ -11,17 +11,17 @@ import { IoIosArrowRoundForward } from "react-icons/io";
 import AddSupplierComponent from "../../components/addSupplier/AddSupplierComponent";
 
 function Supplier() {
-  // const navigate = useNavigate();
-  const { user } = UseAuthContext();
+  const navigate = useNavigate();
+  const { user, isloading } = UseAuthContext();
   const [hideAddComponet, setAddSupplierComponent] = useState(false);
   const handleHideAddSupplierComponent = () =>
     setAddSupplierComponent((c) => !c);
 
-  //   useEffect(() => {
-  //     if (!isloading && !user) {`
-  //       navigate("/login");
-  //     }
-  //   }, [user, isloading, navigate]);
+  useEffect(() => {
+    if (!isloading && !user) {
+      navigate("/login");
+    }
+  }, [user, isloading, navigate]);
   const { isLoading, isError, error, data } = useSuppliers();
   const propsOutlet = useOutletContext();
   const table = TanStackTable({
