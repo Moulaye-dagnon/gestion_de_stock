@@ -1,6 +1,7 @@
 import axios from "axios";
 export const api = axios.create({
-  baseURL: "https://back-odetta-moulaye-d-1bbca60b.koyeb.app",
+  baseURL:
+    "https://4f8241f6-0741-49f7-88ab-fb1e2178aa63-00-25qf97t5eiuo7.riker.replit.dev",
   withCredentials: true,
 });
 
@@ -17,7 +18,7 @@ api.interceptors.response.use(
       originalRequest._retry = true;
       try {
         await axios.post(
-          "https://back-odetta-moulaye-d-1bbca60b.koyeb.app/refresh",
+          "https://4f8241f6-0741-49f7-88ab-fb1e2178aa63-00-25qf97t5eiuo7.riker.replit.dev/refresh",
           null,
           {
             withCredentials: true,
