@@ -44,7 +44,7 @@ export function Login() {
             label={"Email *"}
             name={"email"}
             type={"email"}
-            value={"test@gmail.com"}
+            value={inputValue.email}
             id={"email"}
             placeholder={"Entrez votre Email"}
             handlechange={handleChange}
@@ -53,7 +53,7 @@ export function Login() {
             label={"Mot de passe *"}
             name={"password"}
             type={"password"}
-            value={"12345678"}
+            value={inputValue.password}
             id={"password"}
             placeholder={"Créez  votre mot de passe"}
             handlechange={handleChange}
