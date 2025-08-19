@@ -38,6 +38,7 @@ export function Login() {
         <h1 className="text-3xl mb-10 font-bold">
           Connectez-vous à votre compte
         </h1>
+        <i>A but educatif, Email : test@gmail.com , Mdp: 12345678</i>
 
         <form onSubmit={handleSubmit} action="">
           <InputComponent
