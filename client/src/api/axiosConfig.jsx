@@ -1,7 +1,6 @@
 import axios from "axios";
 export const api = axios.create({
-  baseURL:
-    "https://4f8241f6-0741-49f7-88ab-fb1e2178aa63-00-25qf97t5eiuo7.riker.replit.dev",
+  baseURL: "https://gestion-de-stock-bpjg.onrender.com",
   withCredentials: true,
 });
 
@@ -18,7 +17,7 @@ api.interceptors.response.use(
       originalRequest._retry = true;
       try {
         await axios.post(
-          "https://4f8241f6-0741-49f7-88ab-fb1e2178aa63-00-25qf97t5eiuo7.riker.replit.dev/refresh",
+          "https://gestion-de-stock-bpjg.onrender.com/refresh",
           null,
           {
             withCredentials: true,
