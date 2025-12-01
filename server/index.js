@@ -25,6 +25,7 @@ const OutStock = require("./route/OutStock");
 const Statistiques = require("./route/Stat");
 const categorie = require("./route/Categorie");
 const client = require("./route/client");
+
 app.use("", authRoute);
 app.use("", product);
 app.use("", supplier);
@@ -33,6 +34,10 @@ app.use("", OutStock);
 app.use("", Statistiques);
 app.use("", categorie);
 app.use("", client);
+
+app.get("/", (req, res) => {
+  console.log("just keep server on");
+});
 app.listen(port, (req, res) => {
   console.log("server lance sur le port", port);
 });
