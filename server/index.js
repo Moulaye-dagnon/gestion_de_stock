@@ -25,6 +25,10 @@ const OutStock = require("./route/OutStock");
 const Statistiques = require("./route/Stat");
 const categorie = require("./route/Categorie");
 const client = require("./route/client");
+app.get("/uptime", (req, res) => {
+  console.log("just keep my free server alive");
+  res.send("Just keep my free server alive");
+});
 
 app.use("", authRoute);
 app.use("", product);
@@ -35,10 +39,6 @@ app.use("", Statistiques);
 app.use("", categorie);
 app.use("", client);
 
-app.get("/uptime", (req, res) => {
-  console.log("just keep my free server alive");
-  res.send("Just keep my free server alive");
-});
 app.listen(port, (req, res) => {
   console.log("server lance sur le port", port);
 });
