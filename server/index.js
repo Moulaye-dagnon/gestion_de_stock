@@ -35,7 +35,7 @@ app.use("", Statistiques);
 app.use("", categorie);
 app.use("", client);
 
-app.get("/", (req, res) => {
+app.get("/uptime", (req, res) => {
   console.log("just keep server on");
 });
 app.listen(port, (req, res) => {
