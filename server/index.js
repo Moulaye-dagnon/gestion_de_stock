@@ -36,7 +36,8 @@ app.use("", categorie);
 app.use("", client);
 
 app.get("/uptime", (req, res) => {
-  console.log("just keep server on");
+  console.log("just keep my free server alive");
+  res.send("Just keep my free server alive");
 });
 app.listen(port, (req, res) => {
   console.log("server lance sur le port", port);
